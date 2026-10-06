@@ -8,6 +8,7 @@ dependencies = [
     "uvicorn[standard]",
     "python-multipart",
     "pydantic",
+    "python-dotenv",
     "openai",
     "httpx",
     "pillow",
