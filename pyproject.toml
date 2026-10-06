@@ -1,0 +1,23 @@
+[project]
+name = "document-extraction"
+version = "0.1.0"
+description = "Receipt and invoice extraction API with an eval harness"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "python-multipart",
+    "pydantic",
+    "openai",
+    "httpx",
+    "pillow",
+    "rapidfuzz",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+# No [build-system]: uv treats this as a virtual project and does not install
+# the source tree, so `app` and `evals` are imported from the repo root.
+[tool.pytest.ini_options]
+pythonpath = ["."]
