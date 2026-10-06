@@ -1,0 +1,73 @@
+{
+  "file": "food_receipts01.jpeg",
+  "split": "dev",
+  "tags": [
+    "printed",
+    "faint_print",
+    "service_charge",
+    "tax_added"
+  ],
+  "document_type": "food",
+  "merchant_name": {
+    "value": "Rumah Kecil Talenta",
+    "status": "present",
+    "accept": [
+      "Rumah Kecil Talenta M Bloc",
+      "Talenta"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-10-03",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "MISOA AYAM JAMUR",
+      "quantity": 1,
+      "unit_price": 48000,
+      "amount": 48000
+    },
+    {
+      "description": "MISOA GORENG AYAM PEDAS",
+      "quantity": 1,
+      "unit_price": 48000,
+      "amount": 48000
+    },
+    {
+      "description": "LEMON MADU DINGIN",
+      "quantity": 1,
+      "unit_price": 22000,
+      "amount": 22000
+    },
+    {
+      "description": "LEMON MADU PANAS",
+      "quantity": 1,
+      "unit_price": 22000,
+      "amount": 22000
+    }
+  ],
+  "subtotal": {
+    "value": 140000,
+    "status": "present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": 7000,
+    "status": "present"
+  },
+  "tax": {
+    "value": 14700,
+    "status": "present"
+  },
+  "total": {
+    "value": 161700,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "qris",
+    "status": "present"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "file": "fuel_receipts02.jpg",
+  "split": "dev",
+  "tags": [
+    "printed",
+    "handheld_photo",
+    "columns_run_together",
+    "dot_thousands",
+    "contains_personal_data"
+  ],
+  "document_type": "fuel",
+  "merchant_name": {
+    "value": "BP AKR",
+    "status": "present",
+    "accept": [
+      "bp AKR Joglo Raya",
+      "Joglo Raya Station",
+      "BP"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-03-06",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "BPULTIMATE",
+      "quantity": 3.07,
+      "unit_price": 12930,
+      "amount": 39695
+    }
+  ],
+  "subtotal": {
+    "value": 39695,
+    "status": "present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 39695,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "card",
+    "status": "present"
+  }
+}

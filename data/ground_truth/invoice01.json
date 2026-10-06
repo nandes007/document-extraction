@@ -1,0 +1,58 @@
+{
+  "file": "invoice01.jpeg",
+  "split": "dev",
+  "tags": [
+    "handwritten",
+    "preprinted_form",
+    "stamp_overlap",
+    "folded",
+    "two_digit_year",
+    "contains_personal_data",
+    "ambiguous_handwriting"
+  ],
+  "document_type": "retail",
+  "merchant_name": {
+    "value": "Q-Cell",
+    "status": "present",
+    "accept": [
+      "Q Cell",
+      "QCell"
+    ]
+  },
+  "transaction_date": {
+    "value": "2020-11-29",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "iPhone 8+ 64",
+      "quantity": 1,
+      "unit_price": null,
+      "amount": null
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 5650000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

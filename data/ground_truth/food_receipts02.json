@@ -1,0 +1,86 @@
+{
+  "file": "food_receipts02.jpeg",
+  "split": "dev",
+  "tags": [
+    "printed",
+    "dot_matrix",
+    "crumpled",
+    "stamp_overlap",
+    "fractional_quantity",
+    "repeated_line_item"
+  ],
+  "document_type": "food",
+  "merchant_name": {
+    "value": "Total Buah Segar",
+    "status": "present",
+    "accept": [
+      "Total Buah Segar Rawamangun"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-09-30",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "DRAGON FRUIT MERAH KUPAS LOKAL",
+      "quantity": 0.3,
+      "unit_price": 50500,
+      "amount": 15150
+    },
+    {
+      "description": "ANGGUR SHINE MUSCAT RRC 500g",
+      "quantity": 1,
+      "unit_price": 33500,
+      "amount": 33500
+    },
+    {
+      "description": "ANGGUR SHINE MUSCAT RRC 500g",
+      "quantity": 1,
+      "unit_price": 33500,
+      "amount": 33500
+    },
+    {
+      "description": "KELAPA MUDA THUMB/BIJI ISI 12",
+      "quantity": 1,
+      "unit_price": 38500,
+      "amount": 38500
+    },
+    {
+      "description": "JERUK AFOURER AUSTRALIA KECIL",
+      "quantity": 0.46,
+      "unit_price": 67500,
+      "amount": 31050
+    },
+    {
+      "description": "NESTLE MILO NUGGETS 25g",
+      "quantity": 1,
+      "unit_price": 12500,
+      "amount": 12500
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 164200,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "debit",
+    "status": "present"
+  }
+}

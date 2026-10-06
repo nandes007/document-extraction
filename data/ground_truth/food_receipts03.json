@@ -1,0 +1,62 @@
+{
+  "file": "food_receipts03.jpeg",
+  "split": "dev",
+  "tags": [
+    "printed",
+    "tax_inclusive",
+    "torn_top",
+    "repeated_line_item",
+    "item_modifiers"
+  ],
+  "document_type": "food",
+  "merchant_name": {
+    "value": "Toko Kopi Tuku",
+    "status": "present",
+    "accept": [
+      "Toko Kopi Tuku Everplate Sudirman",
+      "Tuku"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-10-06",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "Es Kopi Susu Tetangga",
+      "quantity": 2,
+      "unit_price": 27000,
+      "amount": 54000
+    },
+    {
+      "description": "Es Kopi Susu Tetangga",
+      "quantity": 1,
+      "unit_price": 27000,
+      "amount": 27000
+    }
+  ],
+  "subtotal": {
+    "value": 81000,
+    "status": "present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": 7364,
+    "status": "present"
+  },
+  "total": {
+    "value": 81000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "other",
+    "status": "present"
+  }
+}

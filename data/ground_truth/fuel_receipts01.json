@@ -1,0 +1,55 @@
+{
+  "file": "fuel_receipts01.jpg",
+  "split": "dev",
+  "tags": [
+    "printed",
+    "clean",
+    "zero_discount_lines",
+    "rounded_amount"
+  ],
+  "document_type": "fuel",
+  "merchant_name": {
+    "value": "Vivo",
+    "status": "present",
+    "accept": [
+      "VIVO Cipondoh",
+      "SPBU Vivo"
+    ]
+  },
+  "transaction_date": {
+    "value": "2025-09-15",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "Revvo 92",
+      "quantity": 3.96,
+      "unit_price": 12610,
+      "amount": 50000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": 0,
+    "status": "present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 50000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "cash",
+    "status": "present"
+  }
+}
