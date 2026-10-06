@@ -179,3 +179,16 @@ README.md
 - Do not add a UI, a database, or an agent loop.
 - Never write a real API key into any file. Read configuration from environment variables.
 - Do not change the schema or the labelling rules without asking.
+
+## Stack
+
+- Python 3.12, managed with `uv` (`pyproject.toml` + `uv.lock`). Run things with `uv run`.
+- FastAPI + uvicorn, `python-multipart` for uploads.
+- Pydantic v2 for schema and validation.
+- `openai` SDK as the client for any OpenAI-compatible endpoint.
+- `httpx` for the eval harness calling the API.
+- Pillow for image handling, `pypdfium2` for PDF pages, `rapidfuzz` for name matching.
+- `pytest` for tests.
+- No LangChain or other orchestration framework, no database, no Redis.
+  The response cache is JSON files on disk.
+- The Dockerfile installs with `uv sync --frozen`.
