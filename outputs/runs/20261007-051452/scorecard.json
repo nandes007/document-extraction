@@ -56,7 +56,7 @@
     {
       "file": "food_receipts02.jpeg",
       "split": "dev",
-      "document_type": "food",
+      "document_type": "retail",
       "expected_total": 164200,
       "http_status": 200,
       "wall_seconds": 102.18,
