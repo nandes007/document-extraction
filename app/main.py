@@ -2,7 +2,7 @@
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, File, HTTPException, UploadFile
-from openai import APIError
+from openai import APIError, APITimeoutError, RateLimitError
 from pydantic import ValidationError
 
 from app.extractor import ProviderError, extract
@@ -28,11 +28,15 @@ def extract_document(file: UploadFile = File(...)) -> dict:
             415, f"expected an image, got content type {file.content_type!r}"
         )
     try:
-        document = extract(file.file.read(), file.content_type)
+        document, meta = extract(file.file.read(), file.content_type)
     except ValidationError as exc:
         raise HTTPException(422, f"model output failed validation:\n{exc}") from exc
+    except RateLimitError as exc:
+        raise HTTPException(429, f"provider rate limit: {exc}") from exc
+    except APITimeoutError as exc:
+        raise HTTPException(504, f"provider timed out: {exc}") from exc
     except (APIError, ProviderError) as exc:  # provider down, rate limited, bad key
         raise HTTPException(502, f"provider call failed: {exc}") from exc
     except RuntimeError as exc:  # missing configuration
         raise HTTPException(500, str(exc)) from exc
-    return document.model_dump(mode="json")
+    return {"document": document.model_dump(mode="json"), "meta": meta}

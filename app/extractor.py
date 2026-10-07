@@ -6,12 +6,16 @@ validation error back once and take the second answer or fail.
 """
 
 import base64
+import hashlib
+import json
 import os
+import time
 from functools import lru_cache
 
 from openai import OpenAI
 from pydantic import ValidationError
 
+from app import cache
 from app.schema import ExpenseDocument
 
 PROMPT = """You read Indonesian receipts and invoices for an expense-claim system.
@@ -44,6 +48,10 @@ Return one JSON object describing the document in the image. Rules:
 - document_type is one of: food, fuel, vehicle_service, retail.
 """
 
+# Bump whenever PROMPT or RESPONSE_FORMAT changes. The cache key also hashes
+# their text, so forgetting is safe for the cache but not for reading scorecards.
+PROMPT_VERSION = "v1"
+
 RESPONSE_FORMAT = {
     "type": "json_schema",
     "json_schema": {
@@ -51,6 +59,12 @@ RESPONSE_FORMAT = {
         "schema": ExpenseDocument.model_json_schema(),
     },
 }
+
+
+# The SDK defaults are a 600 second read timeout and 2 retries. The eval harness
+# waits 180 seconds, so the API must give up first and return a clear error.
+TIMEOUT = 150.0
+MAX_RETRIES = 1
 
 
 class ProviderError(Exception):
@@ -69,8 +83,16 @@ def _require(name: str) -> str:
 @lru_cache(maxsize=1)
 def _client() -> OpenAI:
     return OpenAI(
-        base_url=_require("LLM_BASE_URL"), api_key=_require("LLM_API_KEY")
+        base_url=_require("LLM_BASE_URL"),
+        api_key=_require("LLM_API_KEY"),
+        timeout=TIMEOUT,
+        max_retries=MAX_RETRIES,
     )
+
+
+def _fingerprint() -> str:
+    text = PROMPT + json.dumps(RESPONSE_FORMAT, sort_keys=True)
+    return hashlib.sha256(text.encode()).hexdigest()
 
 
 def extract(
@@ -79,10 +101,19 @@ def extract(
     *,
     client: OpenAI | None = None,
     model: str | None = None,
-) -> ExpenseDocument:
-    """Read one document. Raises ValidationError if both attempts fail."""
-    client = client or _client()
+) -> tuple[ExpenseDocument, dict]:
+    """Read one document. Returns it with metadata; raises ValidationError if
+    both attempts fail."""
     model = model or _require("LLM_MODEL")
+    key = cache.make_key(image_bytes, model, PROMPT_VERSION, _fingerprint())
+    hit = cache.read(key)
+    if hit:
+        # Stored latency and usage describe the original call.
+        return ExpenseDocument.model_validate(hit["document"]), hit["meta"] | {
+            "cached": True
+        }
+
+    client = client or _client()
     image_url = f"data:{content_type};base64,{base64.b64encode(image_bytes).decode()}"
 
     messages = [
@@ -94,20 +125,31 @@ def extract(
     ]
 
     error: ValidationError | None = None
-    for _ in range(2):
+    latency = 0.0
+    usage: dict[str, int] | None = None
+    for attempt in (1, 2):
+        started = time.perf_counter()
         reply = client.chat.completions.create(
             model=model,
             messages=messages,
             response_format=RESPONSE_FORMAT,
             temperature=0,
         )
+        latency += time.perf_counter() - started
         if not reply.choices:
             # Some providers answer 200 with an error body (rate limit, bad
             # model name, no vision or json_schema support). The SDK doesn't raise.
             raise ProviderError(f"provider returned no choices: {reply.model_extra}")
+        if reply.usage:
+            # As reported. total_tokens is not recomputed: some models count
+            # reasoning tokens that are in neither of the other two.
+            usage = {
+                name: (usage or {}).get(name, 0) + (getattr(reply.usage, name) or 0)
+                for name in ("prompt_tokens", "completion_tokens", "total_tokens")
+            }
         content = reply.choices[0].message.content or ""
         try:
-            return ExpenseDocument.model_validate_json(content)
+            document = ExpenseDocument.model_validate_json(content)
         except ValidationError as exc:
             error = exc
             messages += [
@@ -120,4 +162,15 @@ def extract(
                     ),
                 },
             ]
+            continue
+        meta = {
+            "model": model,
+            "prompt_version": PROMPT_VERSION,
+            "attempts": attempt,
+            "latency_seconds": round(latency, 2),
+            "usage": usage,
+            "cached": False,
+        }
+        cache.write(key, {"document": document.model_dump(mode="json"), "meta": meta})
+        return document, meta
     raise error

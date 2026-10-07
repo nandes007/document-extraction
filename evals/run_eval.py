@@ -68,7 +68,7 @@ def score_document(path: Path, truth: dict, client: httpx.Client, api: str) -> d
             "error": f"HTTP {response.status_code}: {response.text[:200]}",
         }
 
-    total = response.json()["total"]
+    total = response.json()["document"]["total"]
     return result | {
         "extracted_total": total["value"],
         "status": total["status"],
