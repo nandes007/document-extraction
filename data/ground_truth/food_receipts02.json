@@ -9,7 +9,7 @@
     "fractional_quantity",
     "repeated_line_item"
   ],
-  "document_type": "food",
+  "document_type": "retail",
   "merchant_name": {
     "value": "Total Buah Segar",
     "status": "present",

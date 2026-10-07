@@ -112,7 +112,7 @@ Six documents are labelled so far: three food, two fuel, one handwritten retail 
 1. Label from the image, never from a model's output alone.
 2. Merchant name is the brand without the branch.
 3. A printed zero (`Diskon: 0`) is `present` with value 0.
-4. Two total-like lines: the first is `subtotal`, the last is `total`. One line: `total` only.
+4. The full and current rules are in `docs/labeling-guide.md`. Where they differ, that file wins.
 5. Repeated rows stay as separate line items. Modifiers such as "LESS SWEET" are not items.
 6. When tax is included in the price, record the stated tax; `total` is the amount paid.
 7. Expand shorthand only when the document makes it unambiguous.
