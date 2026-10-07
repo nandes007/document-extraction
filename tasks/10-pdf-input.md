@@ -46,8 +46,8 @@ one call, so a total on page 2 is read together with the items on page 1.
 
 ## Done when
 
-- [ ] `uv run pytest` passes and no test opens a network connection.
-- [ ] `PROMPT` and `PROMPT_VERSION` are unchanged.
+- [x] `uv run pytest` passes and no test opens a network connection.
+- [x] `PROMPT` and `PROMPT_VERSION` are unchanged.
 - [ ] Checked by the user: one real multi-page PDF from the dataset returns a
       document through `/extract`.
 

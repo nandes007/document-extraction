@@ -16,6 +16,7 @@ from openai import OpenAI
 from pydantic import ValidationError
 
 from app import cache
+from app.pages import to_images
 from app.schema import ExpenseDocument
 
 PROMPT = """You read Indonesian receipts and invoices for an expense-claim system.
@@ -102,9 +103,12 @@ def extract(
     client: OpenAI | None = None,
     model: str | None = None,
 ) -> tuple[ExpenseDocument, dict]:
-    """Read one document. Returns it with metadata; raises ValidationError if
-    both attempts fail."""
+    """Read one document (an image or a PDF). Returns it with metadata; raises
+    ValidationError if both attempts fail, NotAPdf or TooManyPages for bad PDFs."""
+    # Rendered before anything else, so a bad PDF is rejected even unconfigured.
+    pages = to_images(image_bytes, content_type)
     model = model or _require("LLM_MODEL")
+    # Keyed on the uploaded bytes, not the rendered pages.
     key = cache.make_key(image_bytes, model, PROMPT_VERSION, _fingerprint())
     hit = cache.read(key)
     if hit:
@@ -114,14 +118,22 @@ def extract(
         }
 
     client = client or _client()
-    image_url = f"data:{content_type};base64,{base64.b64encode(image_bytes).decode()}"
+    # All pages in one call, so a total on page 2 is read with the items on page 1.
+    parts: list[dict] = [
+        {
+            "type": "image_url",
+            "image_url": {"url": f"data:{ctype};base64,{base64.b64encode(data).decode()}"},
+        }
+        for data, ctype in pages
+    ]
+    if len(pages) > 1:
+        parts.insert(
+            0, {"type": "text", "text": f"The document has {len(pages)} pages, in order."}
+        )
 
     messages = [
         {"role": "system", "content": PROMPT},
-        {
-            "role": "user",
-            "content": [{"type": "image_url", "image_url": {"url": image_url}}],
-        },
+        {"role": "user", "content": parts},
     ]
 
     error: ValidationError | None = None

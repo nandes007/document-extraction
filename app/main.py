@@ -6,6 +6,7 @@ from openai import APIError, APITimeoutError, RateLimitError
 from pydantic import ValidationError
 
 from app.extractor import ProviderError, extract
+from app.pages import NotAPdf, TooManyPages
 
 # Local convenience only. Does not override variables already in the
 # environment, so Docker's env_file still wins.
@@ -23,12 +24,17 @@ def health() -> dict[str, str]:
 # Sync def, so FastAPI runs this in a threadpool: the provider call blocks.
 @app.post("/extract")
 def extract_document(file: UploadFile = File(...)) -> dict:
-    if not (file.content_type or "").startswith("image/"):
+    content_type = file.content_type or ""
+    if not (content_type.startswith("image/") or content_type == "application/pdf"):
         raise HTTPException(
-            415, f"expected an image, got content type {file.content_type!r}"
+            415, f"expected an image or a PDF, got content type {content_type!r}"
         )
     try:
-        document, meta = extract(file.file.read(), file.content_type)
+        document, meta = extract(file.file.read(), content_type)
+    except NotAPdf as exc:
+        raise HTTPException(415, str(exc)) from exc
+    except TooManyPages as exc:
+        raise HTTPException(413, str(exc)) from exc
     except ValidationError as exc:
         raise HTTPException(422, f"model output failed validation:\n{exc}") from exc
     except RateLimitError as exc:

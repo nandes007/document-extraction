@@ -9,6 +9,7 @@ from pydantic import ValidationError
 
 from app.extractor import ProviderError, extract
 from app.main import app
+from tests.test_pages import make_pdf
 from tests.test_schema import VALID_DOCUMENT
 
 VALID_JSON = json.dumps(VALID_DOCUMENT)
@@ -80,6 +81,20 @@ def test_image_is_sent_as_a_data_url():
     extract(b"fake image", "image/png", client=client, model="m")
     parts = client.calls[0]["messages"][-1]["content"]
     assert parts[0]["image_url"]["url"].startswith("data:image/png;base64,")
+    # One image, no page note.
+    assert [p["type"] for p in parts] == ["image_url"]
+
+
+def test_pdf_pages_go_in_one_call_with_a_page_note():
+    client = FakeClient(VALID_JSON)
+    extract(make_pdf(2), "application/pdf", client=client, model="m")
+    assert len(client.calls) == 1
+    parts = client.calls[0]["messages"][-1]["content"]
+    assert [p["type"] for p in parts] == ["text", "image_url", "image_url"]
+    assert parts[0]["text"] == "The document has 2 pages, in order."
+    assert all(
+        p["image_url"]["url"].startswith("data:image/png;base64,") for p in parts[1:]
+    )
 
 
 def test_usage_and_attempts_are_summed_across_a_retry():
