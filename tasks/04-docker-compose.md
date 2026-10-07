@@ -6,7 +6,7 @@
 ## Goal
 
 `docker compose up` leaves the API serving. `docker compose run --rm eval` runs
-the harness against it and writes the scorecard to a mounted `outputs/`. Both
+the harness against it and writes a run folder to a mounted `outputs/runs/`. Both
 work from a fresh clone with only a filled-in `.env`.
 
 ## Files
@@ -39,8 +39,8 @@ work from a fresh clone with only a filled-in `.env`.
 ## Done when
 
 - [ ] `podman compose up -d` then `curl localhost:8000/health` returns 200.
-- [ ] `podman compose run --rm eval` exits 0 and `outputs/scorecard.json` is
-      updated on the host.
+- [ ] `podman compose run --rm eval` exits 0 and a new `outputs/runs/<run_id>/` is
+      created on the host.
 - [ ] `podman compose config` shows no literal secret values.
 - [ ] Nothing engine-specific in the compose file or Dockerfile — no
       `podman`-only keys, no Docker-only build features.
