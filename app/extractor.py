@@ -53,6 +53,10 @@ RESPONSE_FORMAT = {
 }
 
 
+class ProviderError(Exception):
+    """The provider replied, but not with a completion."""
+
+
 def _require(name: str) -> str:
     value = os.environ.get(name)
     if not value:
@@ -97,6 +101,10 @@ def extract(
             response_format=RESPONSE_FORMAT,
             temperature=0,
         )
+        if not reply.choices:
+            # Some providers answer 200 with an error body (rate limit, bad
+            # model name, no vision or json_schema support). The SDK doesn't raise.
+            raise ProviderError(f"provider returned no choices: {reply.model_extra}")
         content = reply.choices[0].message.content or ""
         try:
             return ExpenseDocument.model_validate_json(content)

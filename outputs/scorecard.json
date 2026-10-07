@@ -1,0 +1,88 @@
+{
+  "run": {
+    "finished_at": "2026-10-07T03:31:44+00:00",
+    "api_url": "http://localhost:8000",
+    "model": "dots-studio/dots-3-note-preview:free",
+    "field_scored": "total",
+    "documents": 6
+  },
+  "summary": {
+    "counts": {
+      "correct": 6,
+      "wrong_value": 0,
+      "missed": 0,
+      "hallucinated": 0,
+      "error": 0
+    },
+    "accuracy": 1.0,
+    "by_split": {
+      "dev": {
+        "documents": 6,
+        "correct": 6,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "documents": [
+    {
+      "file": "food_receipts01.jpeg",
+      "split": "dev",
+      "document_type": "food",
+      "expected_total": 161700,
+      "latency_seconds": 78.03,
+      "extracted_total": 161700,
+      "status": "present",
+      "class": "correct"
+    },
+    {
+      "file": "food_receipts02.jpeg",
+      "split": "dev",
+      "document_type": "food",
+      "expected_total": 164200,
+      "latency_seconds": 114.44,
+      "extracted_total": 164200,
+      "status": "present",
+      "class": "correct"
+    },
+    {
+      "file": "food_receipts03.jpeg",
+      "split": "dev",
+      "document_type": "food",
+      "expected_total": 81000,
+      "latency_seconds": 71.82,
+      "extracted_total": 81000,
+      "status": "present",
+      "class": "correct"
+    },
+    {
+      "file": "fuel_receipts01.jpg",
+      "split": "dev",
+      "document_type": "fuel",
+      "expected_total": 50000,
+      "latency_seconds": 111.79,
+      "extracted_total": 50000,
+      "status": "present",
+      "class": "correct"
+    },
+    {
+      "file": "fuel_receipts02.jpg",
+      "split": "dev",
+      "document_type": "fuel",
+      "expected_total": 39695,
+      "latency_seconds": 100.56,
+      "extracted_total": 39695,
+      "status": "present",
+      "class": "correct"
+    },
+    {
+      "file": "invoice01.jpeg",
+      "split": "dev",
+      "document_type": "retail",
+      "expected_total": 5650000,
+      "latency_seconds": 53.4,
+      "extracted_total": 5650000,
+      "status": "present",
+      "class": "correct"
+    }
+  ]
+}
