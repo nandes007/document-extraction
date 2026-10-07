@@ -1,0 +1,78 @@
+{
+  "file": "fuel_receipts01.jpg",
+  "http_status": 200,
+  "wall_seconds": 88.63,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "VIVO CIPONDOH",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "VIVO\nCIPONDOH"
+      },
+      "transaction_date": {
+        "value": "2025-09-15",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Date: 15-Sep-25/06:40 AM"
+      },
+      "line_items": [
+        {
+          "description": "Revvo 92",
+          "quantity": 3.96,
+          "unit_price": 12610,
+          "amount": 50000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Diskon:                      0\nDiskon kupon:                0\nDiskon BNI:                  0"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 50000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "TOTAL: Rp. 50,000"
+      },
+      "payment_method": {
+        "value": "cash",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Mode Pembayaran: Cash"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 88.62,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 5873,
+        "total_tokens": 7630
+      },
+      "cached": false
+    }
+  }
+}

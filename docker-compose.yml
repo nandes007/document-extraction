@@ -1,0 +1,33 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    environment:
+      CACHE_DIR: /app/.cache/responses
+    ports:
+      - "8000:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    volumes:
+      # Cached responses survive rebuilds and are shared with local runs.
+      - ./.cache:/app/.cache
+    healthcheck:
+      # The slim image has no curl.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  eval:
+    build: .
+    # Only started by `compose run eval`, so `compose up` never spends quota.
+    profiles: ["eval"]
+    environment:
+      API_URL: http://api:8000
+    command: ["python", "evals/run_eval.py"]
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - ./outputs:/app/outputs
+      # Read-only: a container must never be able to change ground truth.
+      - ./data:/app/data:ro
