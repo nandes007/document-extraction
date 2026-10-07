@@ -82,6 +82,25 @@ def test_image_is_sent_as_a_data_url():
     assert parts[0]["image_url"]["url"].startswith("data:image/png;base64,")
 
 
+def test_pdf_pages_go_in_one_call_with_a_page_note():
+    from tests.test_pages import make_pdf
+
+    client = FakeClient(VALID_JSON)
+    extract(make_pdf(2), "application/pdf", client=client, model="m")
+    assert len(client.calls) == 1
+    parts = client.calls[0]["messages"][-1]["content"]
+    assert parts[0] == {"type": "text", "text": "The document has 2 pages, in order."}
+    assert [p["type"] for p in parts[1:]] == ["image_url", "image_url"]
+    assert all(p["image_url"]["url"].startswith("data:image/png;base64,") for p in parts[1:])
+
+
+def test_single_image_has_one_part_and_no_note():
+    client = FakeClient(VALID_JSON)
+    extract(b"fake image", "image/jpeg", client=client, model="m")
+    parts = client.calls[0]["messages"][-1]["content"]
+    assert [p["type"] for p in parts] == ["image_url"]
+
+
 def test_usage_and_attempts_are_summed_across_a_retry():
     client = FakeClient(INVALID_JSON, VALID_JSON)
     _, meta = extract(b"fake image", "image/jpeg", client=client, model="m")

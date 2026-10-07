@@ -15,7 +15,7 @@ from functools import lru_cache
 from openai import OpenAI
 from pydantic import ValidationError
 
-from app import cache
+from app import cache, pages
 from app.schema import ExpenseDocument
 
 PROMPT = """You read Indonesian receipts and invoices for an expense-claim system.
@@ -102,8 +102,8 @@ def extract(
     client: OpenAI | None = None,
     model: str | None = None,
 ) -> tuple[ExpenseDocument, dict]:
-    """Read one document. Returns it with metadata; raises ValidationError if
-    both attempts fail."""
+    """Read one document (an image or a PDF). Returns it with metadata; raises
+    ValidationError if both attempts fail, and the pages errors for a bad PDF."""
     model = model or _require("LLM_MODEL")
     key = cache.make_key(image_bytes, model, PROMPT_VERSION, _fingerprint())
     hit = cache.read(key)
@@ -113,15 +113,22 @@ def extract(
             "cached": True
         }
 
+    images = pages.to_images(image_bytes, content_type)
     client = client or _client()
-    image_url = f"data:{content_type};base64,{base64.b64encode(image_bytes).decode()}"
+    parts: list[dict] = [
+        {
+            "type": "image_url",
+            "image_url": {"url": f"data:{kind};base64,{base64.b64encode(data).decode()}"},
+        }
+        for data, kind in images
+    ]
+    if len(images) > 1:
+        # Outside PROMPT, so single images keep their prompt and cache entries.
+        parts.insert(0, {"type": "text", "text": f"The document has {len(images)} pages, in order."})
 
     messages = [
         {"role": "system", "content": PROMPT},
-        {
-            "role": "user",
-            "content": [{"type": "image_url", "image_url": {"url": image_url}}],
-        },
+        {"role": "user", "content": parts},
     ]
 
     error: ValidationError | None = None

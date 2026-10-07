@@ -13,6 +13,7 @@ dependencies = [
     "httpx",
     "pillow",
     "rapidfuzz",
+    "pypdfium2>=5.14.0",
 ]
 
 [dependency-groups]
