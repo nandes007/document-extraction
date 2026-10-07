@@ -1,0 +1,78 @@
+{
+  "file": "invoice01.jpeg",
+  "http_status": 200,
+  "wall_seconds": 41.37,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "Q-CELL",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "Q-CELL"
+      },
+      "transaction_date": {
+        "value": "2020-11-29",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "29. 11. 20."
+      },
+      "line_items": [
+        {
+          "description": "Iphone 8+ 64",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": null
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "total": {
+        "value": 5650000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "TOTAL : 5.650.000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.5,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 41.37,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 3199,
+        "total_tokens": 4956
+      },
+      "cached": false
+    }
+  }
+}

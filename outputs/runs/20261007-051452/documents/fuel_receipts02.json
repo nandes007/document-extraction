@@ -1,0 +1,78 @@
+{
+  "file": "fuel_receipts02.jpg",
+  "http_status": 200,
+  "wall_seconds": 94.22,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "JOGLO RAYA Station",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "JOGLO RAYA Station"
+      },
+      "transaction_date": {
+        "value": "2026-03-06",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Date: 2026-03-06"
+      },
+      "line_items": [
+        {
+          "description": "BPULTIMATE",
+          "quantity": 3.07,
+          "unit_price": 12930,
+          "amount": 39695
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 39695,
+        "status": "present",
+        "confidence": 0.98,
+        "evidence": "Total: Rp 39.695"
+      },
+      "payment_method": {
+        "value": "credit",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "EDC BCA"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 94.21,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 8112,
+        "total_tokens": 9794
+      },
+      "cached": false
+    }
+  }
+}

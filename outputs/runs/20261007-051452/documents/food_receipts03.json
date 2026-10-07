@@ -1,0 +1,84 @@
+{
+  "file": "food_receipts03.jpeg",
+  "http_status": 200,
+  "wall_seconds": 95.08,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "TOKO KOPI TUKU",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "TOKO KOPI TUKU"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "06-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "Es Kopi Susu Tetangga",
+          "quantity": 2.0,
+          "unit_price": 27000,
+          "amount": 54000
+        },
+        {
+          "description": "Es Kopi Susu Tetangga",
+          "quantity": 1.0,
+          "unit_price": 27000,
+          "amount": 27000
+        }
+      ],
+      "subtotal": {
+        "value": 81000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total BEVERAGES                81.000"
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 7364,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Price inclusive of PBJT :      7.364"
+      },
+      "total": {
+        "value": 81000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Grand Total :                  81.000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 95.07,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 8813,
+        "total_tokens": 10570
+      },
+      "cached": false
+    }
+  }
+}
