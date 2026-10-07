@@ -1,0 +1,55 @@
+{
+  "file": "test_fuel_receipts04.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "handheld_photo",
+    "blurry",
+    "ambiguous_date_format"
+  ],
+  "document_type": "fuel",
+  "merchant_name": {
+    "value": "Pertamina",
+    "status": "present",
+    "accept": [
+      "SPBU S Parman",
+      "Pertamina SPBU S Parman"
+    ]
+  },
+  "transaction_date": {
+    "value": "2025-11-10",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "PERTAMAX TURBO",
+      "quantity": 4.58,
+      "unit_price": 13100,
+      "amount": 60000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 60000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "cash",
+    "status": "present"
+  }
+}

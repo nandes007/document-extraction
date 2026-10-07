@@ -1,0 +1,62 @@
+{
+  "file": "test_service_note02.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "screenshot",
+    "qris",
+    "labor_only",
+    "subtotal_present"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "Aan Automobil",
+    "status": "present",
+    "accept": [
+      "AAN AUTOMOBIL (BGR)",
+      "Aan Automobil BGR"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-09-05",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "GT BEARING RODA DEPAN",
+      "quantity": 1,
+      "unit_price": 75000,
+      "amount": 75000
+    },
+    {
+      "description": "ANALISA",
+      "quantity": 1,
+      "unit_price": 50000,
+      "amount": 50000
+    }
+  ],
+  "subtotal": {
+    "value": 125000,
+    "status": "present"
+  },
+  "discount": {
+    "value": 0,
+    "status": "present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 125000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "qris",
+    "status": "present"
+  }
+}

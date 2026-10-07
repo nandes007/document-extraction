@@ -1,0 +1,80 @@
+{
+  "file": "test_service_note06.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "dot_matrix",
+    "rotated",
+    "low_legibility",
+    "zero_tax_printed"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "CV Intan Mulia",
+    "status": "present",
+    "accept": [
+      "CV INTAN MULIA 10136",
+      "Intan Mulia"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-10-04",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "OLI MPX2 10W30 SL 0.8L IDE",
+      "quantity": 1,
+      "unit_price": 79000,
+      "amount": 79000
+    },
+    {
+      "description": "SCOOTER GEAR OIL-SYN 120ML REP",
+      "quantity": 1,
+      "unit_price": 23000,
+      "amount": 23000
+    },
+    {
+      "description": "WEIGHT SET CLUTCH",
+      "quantity": 1,
+      "unit_price": 149000,
+      "amount": 149000
+    },
+    {
+      "description": "QS SERVICE",
+      "quantity": 1,
+      "unit_price": 95000,
+      "amount": 95000
+    },
+    {
+      "description": "LR CVT & PASANG KAMPAS GANDA",
+      "quantity": 1,
+      "unit_price": 89000,
+      "amount": 89000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": 0,
+    "status": "present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": 0,
+    "status": "present"
+  },
+  "total": {
+    "value": 435000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

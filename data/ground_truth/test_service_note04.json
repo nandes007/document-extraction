@@ -1,0 +1,99 @@
+{
+  "file": "test_service_note04.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "scan",
+    "parts_list",
+    "no_tax",
+    "multi_document_same_wo"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "PT. Srikandi Diamond Motors",
+    "status": "present",
+    "accept": [
+      "PT. Srikandi Diamond Motors",
+      "Srikandi",
+      "Mitsubishi Srikandi"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-09-26",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "OIL FILTER",
+      "quantity": 1,
+      "unit_price": 53100,
+      "amount": 53100
+    },
+    {
+      "description": "BRAKE CLEANER",
+      "quantity": 1,
+      "unit_price": 52200,
+      "amount": 52200
+    },
+    {
+      "description": "GASKET/PAN DRAIN PLUG - EPA ITEM",
+      "quantity": 1,
+      "unit_price": 25200,
+      "amount": 25200
+    },
+    {
+      "description": "0W 20 SP (1L)",
+      "quantity": 4,
+      "unit_price": 167400,
+      "amount": 669600
+    },
+    {
+      "description": "AMPLAS KASAR",
+      "quantity": 1,
+      "unit_price": 5000,
+      "amount": 5000
+    },
+    {
+      "description": "CATALYTIC CLEANER GASOLINE",
+      "quantity": 1,
+      "unit_price": 189000,
+      "amount": 189000
+    },
+    {
+      "description": "INJECTOR CLEANER CONCENTRATE 200ML",
+      "quantity": 1,
+      "unit_price": 153000,
+      "amount": 153000
+    },
+    {
+      "description": "SUPER ENGINE CONDITIONER + FLUSHING",
+      "quantity": 1,
+      "unit_price": 189000,
+      "amount": 189000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 1336100,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

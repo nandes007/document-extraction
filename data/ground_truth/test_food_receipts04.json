@@ -1,0 +1,55 @@
+{
+  "file": "test_food_receipts04.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "delivery",
+    "voucher_discount",
+    "tax_inclusive",
+    "long_thermal_strip"
+  ],
+  "document_type": "food",
+  "merchant_name": {
+    "value": "Hangry",
+    "status": "present",
+    "accept": [
+      "Hangry Harmoni"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-10-06",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "Paket Lengkap Spesial Ayam Goreng Mak Dura",
+      "quantity": 1,
+      "unit_price": null,
+      "amount": 40900
+    }
+  ],
+  "subtotal": {
+    "value": 40901,
+    "status": "present"
+  },
+  "discount": {
+    "value": 20500,
+    "status": "present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": 1855,
+    "status": "present"
+  },
+  "total": {
+    "value": 20401,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "other",
+    "status": "present"
+  }
+}
