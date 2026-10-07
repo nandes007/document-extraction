@@ -17,8 +17,13 @@ def envelope(cached: bool = False, latency: float = 2.0) -> dict:
 
 
 def truth(total: int) -> dict:
-    return {"split": "dev", "document_type": "food",
-            "total": {"value": total, "status": "present"}}
+    """Ground truth that matches VALID_DOCUMENT everywhere except, maybe, total."""
+    label = {
+        name: {"value": field["value"], "status": field["status"]}
+        if isinstance(field, dict) else field
+        for name, field in VALID_DOCUMENT.items()
+    }
+    return label | {"split": "dev", "total": {"value": total, "status": "present"}}
 
 
 @pytest.fixture
@@ -46,8 +51,12 @@ def test_scoring_a_saved_run_gives_expected_counts(tmp_path, docs):
     scorecard = run_eval.score(run_dir, {"run_id": "t"}, ground_truth=gt)
     summary = scorecard["summary"]
 
-    assert summary["counts"]["correct"] == 2
-    assert summary["counts"]["wrong_value"] == 1
+    # Eight value fields on three documents; only c's total is wrong.
+    assert summary["value_fields"] == {"correct": 23, "total": 24, "accuracy": 0.958}
+    assert summary["fields"]["total"]["wrong_value"] == 1
+    assert summary["failures"] == [{"file": "c.jpg", "field": "total", "class": "wrong_value"}]
+    assert summary["hallucinated"] == 0
+    assert summary["line_items"]["precision"] == 1.0
     assert summary["cached_documents"] == 1
     assert summary["total_tokens"] == 40  # the cached document spent nothing
     # Median and max over fresh calls only: the cached 9.0 is excluded.
@@ -71,8 +80,9 @@ def test_timeout_on_one_document_does_not_stop_the_run(tmp_path, docs):
     assert saved == ["a.json", "b.json", "c.json"]
     assert json.loads((run_dir / "documents" / "b.json").read_text())["error"] == "ReadTimeout"
 
-    classes = [d["class"] for d in run_eval.score(run_dir, {}, ground_truth=gt)["documents"]]
-    assert classes == ["correct", "error", "wrong_value"]
+    totals = [d["fields"]["total"]["class"]
+              for d in run_eval.score(run_dir, {}, ground_truth=gt)["documents"]]
+    assert totals == ["correct", "error", "wrong_value"]
 
 
 def test_rescore_matches_original_and_makes_no_http_request(tmp_path, docs, monkeypatch):

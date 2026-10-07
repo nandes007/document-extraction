@@ -20,6 +20,11 @@ from pathlib import Path
 
 import httpx
 
+# Run as `python evals/run_eval.py` (compose, the task docs), Python puts
+# evals/ on the path, not the repo root, so the package import needs this.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from evals.scoring import VALUE_FIELDS, match_line_items, score_fields  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 DOCUMENTS = ROOT / "data" / "documents"
 GROUND_TRUTH = ROOT / "data" / "ground_truth"
@@ -30,22 +35,6 @@ RUNS = ROOT / "outputs" / "runs"
 TIMEOUT = 180.0
 
 CLASSES = ["correct", "wrong_value", "missed", "hallucinated", "error"]
-
-
-def classify(expected: dict, actual: dict) -> str:
-    """Compare one field. `expected` and `actual` are {"value", "status"} dicts."""
-    expected_has = expected["status"] == "present"
-    actual_has = actual["status"] == "present"
-
-    if expected_has and actual_has:
-        return "correct" if expected["value"] == actual["value"] else "wrong_value"
-    if expected_has:
-        return "missed"  # we abstained where a value exists
-    if actual_has:
-        return "hallucinated"  # we gave a value where there is none to give
-    # Both abstained. Nothing was missed and nothing invented, so this is right
-    # even when one says "not_present" and the other "unreadable".
-    return "correct"
 
 
 # --- collect ----------------------------------------------------------------
@@ -100,20 +89,25 @@ def score_record(record: dict, truth: dict) -> dict:
     result = {
         "file": record["file"],
         "split": truth["split"],
-        "document_type": truth["document_type"],
-        "expected_total": truth["total"]["value"],
+        "document_type": truth["document_type"],  # the label, used for slicing
         "http_status": record["http_status"],
         "wall_seconds": record["wall_seconds"],
     }
     if "response" not in record:
-        return result | {"class": "error", "error": record["error"][:200]}
+        # An error document counts every field as an error, so it cannot
+        # quietly drop out of the denominator.
+        return result | {
+            "error": record["error"][:200],
+            "fields": {name: {"class": "error"}
+                       for name in [*VALUE_FIELDS, "document_type"]},
+            "line_items": {"matched": 0, "missing": len(truth["line_items"]), "extra": 0},
+        }
 
-    total = record["response"]["document"]["total"]
+    document = record["response"]["document"]
     meta = record["response"]["meta"]
     return result | {
-        "extracted_total": total["value"],
-        "status": total["status"],
-        "class": classify(truth["total"], total),
+        "fields": score_fields(truth, document),
+        "line_items": match_line_items(truth["line_items"], document["line_items"]),
         "provider_latency_seconds": meta["latency_seconds"],
         "attempts": meta["attempts"],
         "usage": meta["usage"],
@@ -127,13 +121,32 @@ def _one_or_mixed(values: set) -> str | None:
     return values.pop() if len(values) == 1 else "mixed"
 
 
-def _accuracy(results: list[dict]) -> dict:
-    correct = sum(1 for r in results if r["class"] == "correct")
-    return {
-        "documents": len(results),
-        "correct": correct,
-        "accuracy": round(correct / len(results), 3),
+def _ratio(part: int, whole: int) -> float | None:
+    return round(part / whole, 3) if whole else None
+
+
+def _value_fields(results: list[dict]) -> dict:
+    """Correct out of total over the eight value fields."""
+    classes = [r["fields"][f]["class"] for r in results for f in VALUE_FIELDS]
+    correct = classes.count("correct")
+    return {"correct": correct, "total": len(classes),
+            "accuracy": _ratio(correct, len(classes))}
+
+
+def _per_field(results: list[dict], name: str) -> dict:
+    counts = Counter(r["fields"][name]["class"] for r in results)
+    return {c: counts[c] for c in CLASSES} | {
+        "accuracy": _ratio(counts["correct"], len(results))
     }
+
+
+def _line_items(results: list[dict]) -> dict:
+    matched = sum(r["line_items"]["matched"] for r in results)
+    missing = sum(r["line_items"]["missing"] for r in results)
+    extra = sum(r["line_items"]["extra"] for r in results)
+    return {"matched": matched, "missing": missing, "extra": extra,
+            "precision": _ratio(matched, matched + extra),
+            "recall": _ratio(matched, matched + missing)}
 
 
 def score(run_dir: Path, run: dict, ground_truth: Path | None = None) -> dict:
@@ -154,22 +167,40 @@ def score(run_dir: Path, run: dict, ground_truth: Path | None = None) -> dict:
     metas = [r["response"]["meta"] for r in records if "response" in r]
     fresh = [r for r in results if r.get("cached") is False]
     latencies = [r["provider_latency_seconds"] for r in fresh]
-    counts = Counter(r["class"] for r in results)
+    run = {k: v for k, v in run.items() if k != "field_scored"}  # pre-task-7 key
 
     return {
         "run": run | {
             "model": _one_or_mixed({m["model"] for m in metas}),
             "prompt_version": _one_or_mixed({m["prompt_version"] for m in metas}),
-            "field_scored": "total",
+            "fields_scored": [*VALUE_FIELDS, "document_type", "line_items"],
             "documents": len(results),
         },
         "summary": {
-            "counts": {name: counts[name] for name in CLASSES},
-            "accuracy": round(counts["correct"] / len(results), 3),
-            "by_split": {
-                split: _accuracy([r for r in results if r["split"] == split])
-                for split in sorted({r["split"] for r in results})
+            "value_fields": _value_fields(results),
+            "hallucinated": sum(
+                r["fields"][f]["class"] == "hallucinated"
+                for r in results for f in VALUE_FIELDS
+            ),
+            "error_documents": sum(1 for r in results if "error" in r),
+            "failures": [
+                {"file": r["file"], "field": f, "class": r["fields"][f]["class"]}
+                for r in results for f in VALUE_FIELDS
+                if r["fields"][f]["class"] != "correct"
+            ],
+            "fields": {
+                name: _per_field(results, name)
+                for name in [*VALUE_FIELDS, "document_type"]
             },
+            "by_document_type": {
+                t: _value_fields([r for r in results if r["document_type"] == t])
+                for t in sorted({r["document_type"] for r in results})
+            },
+            "by_split": {
+                s: _value_fields([r for r in results if r["split"] == s])
+                for s in sorted({r["split"] for r in results})
+            },
+            "line_items": _line_items(results),
             # Tokens spent by this run: cached answers cost nothing today.
             "total_tokens": sum((r["usage"] or {}).get("total_tokens", 0) for r in fresh),
             "cached_documents": sum(1 for r in results if r.get("cached")),
@@ -185,12 +216,14 @@ def score(run_dir: Path, run: dict, ground_truth: Path | None = None) -> dict:
 def write_scorecard(run_dir: Path, scorecard: dict) -> int:
     path = run_dir / "scorecard.json"
     path.write_text(json.dumps(scorecard, indent=2) + "\n")
-    counts = scorecard["summary"]["counts"]
-    n = scorecard["run"]["documents"]
-    print(f"\n{counts['correct']}/{n} correct "
-          f"({scorecard['summary']['accuracy']:.0%}) -> {path}")
+    summary = scorecard["summary"]
+    value = summary["value_fields"]
+    print(f"\n{value['correct']}/{value['total']} value fields correct, "
+          f"{summary['hallucinated']} hallucinated -> {path}")
+    for failure in summary["failures"]:
+        print(f"  {failure['file']:26} {failure['field']:16} {failure['class']}")
     # Non-zero so `docker compose run eval` fails loudly on a broken run.
-    return 1 if counts["error"] else 0
+    return 1 if summary["error_documents"] else 0
 
 
 # --- entry point ------------------------------------------------------------
