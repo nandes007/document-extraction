@@ -15,7 +15,7 @@ from functools import lru_cache
 from openai import OpenAI
 from pydantic import ValidationError
 
-from app import cache
+from app import cache, validation
 from app.pages import to_images
 from app.schema import ExpenseDocument
 
@@ -104,7 +104,24 @@ def extract(
     model: str | None = None,
 ) -> tuple[ExpenseDocument, dict]:
     """Read one document (an image or a PDF). Returns it with metadata; raises
-    ValidationError if both attempts fail, NotAPdf or TooManyPages for bad PDFs."""
+    ValidationError if both attempts fail, NotAPdf or TooManyPages for bad PDFs.
+
+    Checks and abstention run on every call, cached or not, so the current
+    rules always apply. `meta.checks` and `meta.abstained` say what they did."""
+    raw, meta = _extract_raw(image_bytes, content_type, client=client, model=model)
+    checks = validation.run_checks(raw)
+    document, abstained = validation.abstain(raw, checks)
+    return document, meta | {"checks": checks, "abstained": abstained}
+
+
+def _extract_raw(
+    image_bytes: bytes,
+    content_type: str = "image/jpeg",
+    *,
+    client: OpenAI | None = None,
+    model: str | None = None,
+) -> tuple[ExpenseDocument, dict]:
+    """The model's document as read, before checks: this is what is cached."""
     # Rendered before anything else, so a bad PDF is rejected even unconfigured.
     pages = to_images(image_bytes, content_type)
     model = model or _require("LLM_MODEL")
