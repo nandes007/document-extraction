@@ -23,6 +23,10 @@ services:
     profiles: ["eval"]
     environment:
       API_URL: http://api:8000
+      # Not secrets, so no env_file here: the key stays with `api` only.
+      EVAL_CONCURRENCY: ${EVAL_CONCURRENCY:-3}
+      PRICE_INPUT_PER_M: ${PRICE_INPUT_PER_M:-0}
+      PRICE_OUTPUT_PER_M: ${PRICE_OUTPUT_PER_M:-0}
     command: ["python", "evals/run_eval.py"]
     depends_on:
       api:
