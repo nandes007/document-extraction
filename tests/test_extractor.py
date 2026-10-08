@@ -48,6 +48,7 @@ def temp_cache(tmp_path, monkeypatch):
     """Every test gets its own cache dir; none touches the real one."""
     monkeypatch.setenv("CACHE_DIR", str(tmp_path / "cache"))
     monkeypatch.setenv("LLM_CACHE", "1")
+    monkeypatch.delenv("LLM_REASONING_EFFORT", raising=False)  # tests set it themselves
 
 
 def test_valid_first_reply_is_not_retried():
@@ -104,6 +105,7 @@ def test_usage_and_attempts_are_summed_across_a_retry():
     # total_tokens is summed as reported, not recomputed (180 != 100 + 50).
     assert meta["usage"] == {
         "prompt_tokens": 200, "completion_tokens": 100, "total_tokens": 360,
+        "reasoning_tokens": None,  # FakeClient does not report it
     }
     assert meta["cached"] is False
     assert meta["model"] == "m" and meta["prompt_version"]
@@ -152,3 +154,45 @@ def test_response_is_a_document_and_meta_envelope(monkeypatch):
     ).json()
     assert body["document"]["total"]["value"] == 161700
     assert body["meta"]["cached"] is False
+
+
+def test_reasoning_effort_is_sent_when_set(monkeypatch):
+    monkeypatch.setenv("LLM_REASONING_EFFORT", "low")
+    client = FakeClient(VALID_JSON)
+    _, meta = extract(b"fake image", "image/jpeg", client=client, model="m")
+    assert client.calls[0]["extra_body"] == {"reasoning": {"effort": "low"}}
+    assert meta["reasoning_effort"] == "low"
+
+
+def test_nothing_is_sent_when_reasoning_effort_is_empty(monkeypatch):
+    monkeypatch.setenv("LLM_REASONING_EFFORT", "")
+    client = FakeClient(VALID_JSON)
+    _, meta = extract(b"fake image", "image/jpeg", client=client, model="m")
+    assert client.calls[0]["extra_body"] is None
+    assert meta["reasoning_effort"] is None
+
+
+def test_unknown_reasoning_effort_is_refused(monkeypatch):
+    monkeypatch.setenv("LLM_REASONING_EFFORT", "lowest")
+    with pytest.raises(RuntimeError, match="LLM_REASONING_EFFORT"):
+        extract(b"fake image", "image/jpeg", client=FakeClient(VALID_JSON), model="m")
+
+
+class ReasoningClient(FakeClient):
+    """Reports completion_tokens_details.reasoning_tokens, like OpenRouter."""
+
+    def create(self, **kwargs):
+        reply = super().create(**kwargs)
+        reply.usage.completion_tokens_details = SimpleNamespace(reasoning_tokens=40)
+        return reply
+
+
+def test_reasoning_tokens_are_recorded_and_summed_across_a_retry():
+    _, meta = extract(b"fake image", "image/jpeg",
+                      client=ReasoningClient(INVALID_JSON, VALID_JSON), model="m")
+    assert meta["usage"]["reasoning_tokens"] == 80
+
+
+def test_reasoning_tokens_are_null_when_not_reported():
+    _, meta = extract(b"fake image", "image/jpeg", client=FakeClient(VALID_JSON), model="m")
+    assert meta["usage"]["reasoning_tokens"] is None

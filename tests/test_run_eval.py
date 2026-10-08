@@ -248,3 +248,29 @@ def test_p95_on_a_known_list():
     assert run_eval.p95([float(i) for i in range(1, 21)]) == 19.05
     assert run_eval.p95([7.0]) == 7.0
     assert run_eval.p95([]) is None
+
+
+def test_split_dev_sends_only_dev_documents(tmp_path, monkeypatch):
+    documents, gt = tmp_path / "documents", tmp_path / "gt"
+    documents.mkdir(), gt.mkdir()
+    for stem, split in [("a", "dev"), ("test_b", "test"), ("c", "dev")]:
+        (documents / f"{stem}.jpg").write_bytes(b"img")
+        (gt / f"{stem}.json").write_text(json.dumps(truth(161700) | {"split": split}))
+    monkeypatch.setattr(run_eval, "DOCUMENTS", documents)
+    monkeypatch.setattr(run_eval, "GROUND_TRUTH", gt)
+    monkeypatch.setattr(run_eval, "RUNS", tmp_path / "runs")
+    monkeypatch.setenv("RUN_ID", "r")
+
+    sent = []
+
+    def handler(request):
+        if request.url.path == "/health":
+            return httpx.Response(200, json={"status": "ok"})
+        sent.append(request.content.split(b'filename="')[1].split(b'"')[0].decode())
+        return httpx.Response(200, json=envelope())
+
+    assert run_eval.main(["--split", "dev"], client=client_for(handler)) == 0
+    assert sorted(sent) == ["a.jpg", "c.jpg"]
+    scorecard = json.loads((tmp_path / "runs" / "r" / "scorecard.json").read_text())
+    assert scorecard["run"]["split"] == "dev"
+    assert scorecard["run"]["documents"] == 2

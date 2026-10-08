@@ -56,3 +56,20 @@ def test_failed_extraction_leaves_nothing_in_the_cache(tmp_path):
     with pytest.raises(ValidationError):
         extract(b"img", client=client, model="m")
     assert not list((tmp_path / "cache").glob("*.json"))
+
+
+def test_changed_reasoning_effort_misses_the_cache(monkeypatch):
+    client = FakeClient(VALID_JSON, VALID_JSON, VALID_JSON)
+    extract(b"img", client=client, model="m")
+    monkeypatch.setenv("LLM_REASONING_EFFORT", "low")
+    _, meta = extract(b"img", client=client, model="m")
+    assert len(client.calls) == 2 and meta["cached"] is False
+    # Same setting again: a hit, and the cached meta says what was sent.
+    _, meta = extract(b"img", client=client, model="m")
+    assert len(client.calls) == 2 and meta["reasoning_effort"] == "low"
+
+
+def test_unset_reasoning_effort_keeps_the_old_cache_key():
+    # Entries written before the setting existed must still be found.
+    assert extractor.cache.make_key(b"i", "m", "v2", "f") == \
+        extractor.cache.make_key(b"i", "m", "v2", "f", None)

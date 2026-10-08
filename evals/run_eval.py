@@ -327,6 +327,8 @@ def main(argv: list[str] | None = None, client: httpx.Client | None = None) -> i
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--rescore", type=Path, metavar="RUN_DIR",
                         help="rebuild scorecard.json from a saved run, no API calls")
+    parser.add_argument("--split", choices=["dev", "test"],
+                        help="send only this split's documents (default: all)")
     args = parser.parse_args(argv)
     if args.rescore:
         return rescore(args.rescore)
@@ -339,6 +341,10 @@ def main(argv: list[str] | None = None, client: httpx.Client | None = None) -> i
         # Skipping would quietly shrink the eval, which is worse than failing.
         if not (GROUND_TRUTH / f"{path.stem}.json").exists():
             sys.exit(f"no ground truth for {path.name}")
+    if args.split:
+        # Tuning runs use dev only, so the held-back test split is not re-read.
+        documents = [p for p in documents
+                     if json.loads((GROUND_TRUTH / f"{p.stem}.json").read_text())["split"] == args.split]
 
     client = client or httpx.Client(timeout=TIMEOUT)
     with client:
@@ -353,6 +359,7 @@ def main(argv: list[str] | None = None, client: httpx.Client | None = None) -> i
 
         run = {"run_id": run_id, "api_url": api, "git_commit": _git_commit(),
                "started_at": _now(), "concurrency": concurrency(),
+               "split": args.split or "all",
                "prices_usd_per_m": prices()}
         started = time.perf_counter()
         collect(run_dir, documents, client, api, workers=run["concurrency"])

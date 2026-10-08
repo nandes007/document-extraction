@@ -77,6 +77,23 @@ TIMEOUT = 150.0
 MAX_RETRIES = 1
 
 
+# Completion tokens dwarf the ~300 tokens of JSON: the cost is in reasoning.
+# OpenRouter takes `"reasoning": {"effort": ...}` in the request body
+# (https://openrouter.ai/docs/use-cases/reasoning-tokens); the OpenAI SDK sends
+# it through `extra_body`. Unset means nothing is sent, so other providers are
+# unaffected.
+REASONING_EFFORTS = ("low", "medium", "high")
+
+
+def _reasoning_effort() -> str | None:
+    effort = os.environ.get("LLM_REASONING_EFFORT") or None
+    if effort is not None and effort not in REASONING_EFFORTS:
+        raise RuntimeError(
+            f"LLM_REASONING_EFFORT must be one of {REASONING_EFFORTS} or empty, got {effort!r}"
+        )
+    return effort
+
+
 class ProviderError(Exception):
     """The provider replied, but not with a completion."""
 
@@ -135,7 +152,8 @@ def _extract_raw(
     pages = to_images(image_bytes, content_type)
     model = model or _require("LLM_MODEL")
     # Keyed on the uploaded bytes, not the rendered pages.
-    key = cache.make_key(image_bytes, model, PROMPT_VERSION, _fingerprint())
+    effort = _reasoning_effort()
+    key = cache.make_key(image_bytes, model, PROMPT_VERSION, _fingerprint(), effort)
     hit = cache.read(key)
     if hit:
         # Stored latency and usage describe the original call.
@@ -172,6 +190,8 @@ def _extract_raw(
             messages=messages,
             response_format=RESPONSE_FORMAT,
             temperature=0,
+            # None adds nothing to the request body.
+            extra_body={"reasoning": {"effort": effort}} if effort else None,
         )
         latency += time.perf_counter() - started
         if not reply.choices:
@@ -181,10 +201,19 @@ def _extract_raw(
         if reply.usage:
             # As reported. total_tokens is not recomputed: some models count
             # reasoning tokens that are in neither of the other two.
+            previous = usage or {}
             usage = {
-                name: (usage or {}).get(name, 0) + (getattr(reply.usage, name) or 0)
+                name: previous.get(name, 0) + (getattr(reply.usage, name) or 0)
                 for name in ("prompt_tokens", "completion_tokens", "total_tokens")
             }
+            # Part of completion_tokens, when the provider breaks it out; null
+            # if it never does, so "not reported" is not mistaken for zero.
+            details = getattr(reply.usage, "completion_tokens_details", None)
+            reasoning = getattr(details, "reasoning_tokens", None)
+            usage["reasoning_tokens"] = (
+                previous.get("reasoning_tokens") if reasoning is None
+                else (previous.get("reasoning_tokens") or 0) + reasoning
+            )
         content = reply.choices[0].message.content or ""
         try:
             document = ExpenseDocument.model_validate_json(content)
@@ -204,6 +233,7 @@ def _extract_raw(
         meta = {
             "model": model,
             "prompt_version": PROMPT_VERSION,
+            "reasoning_effort": effort,
             "attempts": attempt,
             "latency_seconds": round(latency, 2),
             "usage": usage,

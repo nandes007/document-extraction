@@ -19,11 +19,18 @@ def _path(key: str) -> Path:
 
 
 def make_key(
-    image_bytes: bytes, model: str, prompt_version: str, prompt_fingerprint: str
+    image_bytes: bytes, model: str, prompt_version: str, prompt_fingerprint: str,
+    reasoning_effort: str | None = None,
 ) -> str:
-    """Hashing the prompt text too means an edit misses even without a version bump."""
+    """Hashing the prompt text too means an edit misses even without a version bump.
+
+    The reasoning effort joins the key only when set, so entries made without
+    it stay valid.
+    """
     parts = [hashlib.sha256(image_bytes).hexdigest(), model, prompt_version,
              prompt_fingerprint]
+    if reasoning_effort:
+        parts.append(f"reasoning_effort={reasoning_effort}")
     return hashlib.sha256("\n".join(parts).encode()).hexdigest()
 
 
