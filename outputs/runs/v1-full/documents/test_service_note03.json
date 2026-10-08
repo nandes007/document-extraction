@@ -1,0 +1,96 @@
+{
+  "file": "test_service_note03.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "DELTA PERTOYA MOBILINDO",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "DELTA PERTOYA MOBILINDO"
+      },
+      "transaction_date": {
+        "value": "2026-09-28",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "28 September 2026"
+      },
+      "line_items": [
+        {
+          "description": "XFP 0387C",
+          "quantity": 1.0,
+          "unit_price": 1000000,
+          "amount": 1000000
+        },
+        {
+          "description": "0H 0377C",
+          "quantity": 1.0,
+          "unit_price": 5000000,
+          "amount": 5000000
+        },
+        {
+          "description": "SELECTOR DIGITAL",
+          "quantity": 1.0,
+          "unit_price": 1100000,
+          "amount": 1100000
+        },
+        {
+          "description": "RMP EDU STD",
+          "quantity": 1.0,
+          "unit_price": 1500000,
+          "amount": 1500000
+        }
+      ],
+      "subtotal": {
+        "value": 8600000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Subtotal : 8.600.000,00"
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "total": {
+        "value": 8600000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Jumlah hrs di Bayar : 8.600.000,00"
+      },
+      "payment_method": {
+        "value": "transfer",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "BCA 8035 677 611 an Daniel M. K"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 138.4,
+      "usage": {
+        "prompt_tokens": 1234,
+        "completion_tokens": 9030,
+        "total_tokens": 10264
+      },
+      "cached": true
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "file": "test_service_note04.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "PT. Srikandi Diamond Motors",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "PT. Srikandi Diamond Motors"
+      },
+      "transaction_date": {
+        "value": "2026-09-26",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Print : 26 Sep 2026 10:37:29"
+      },
+      "line_items": [
+        {
+          "description": "OIL FILTER",
+          "quantity": 1.0,
+          "unit_price": 59000,
+          "amount": 53100
+        },
+        {
+          "description": "BRAKE CLEANER",
+          "quantity": 1.0,
+          "unit_price": 98000,
+          "amount": 52200
+        },
+        {
+          "description": "GISKTO/PAN DRAIN PLUG - EPA ITEM",
+          "quantity": 1.0,
+          "unit_price": 28000,
+          "amount": 25200
+        },
+        {
+          "description": "OW 20 SP (1L)",
+          "quantity": 4.0,
+          "unit_price": 186000,
+          "amount": 669600
+        },
+        {
+          "description": "AMPLAS KASAR",
+          "quantity": 1.0,
+          "unit_price": 5000,
+          "amount": 5000
+        },
+        {
+          "description": "CATALYTIC CLEANER GASOLINE",
+          "quantity": 1.0,
+          "unit_price": 210000,
+          "amount": 189000
+        },
+        {
+          "description": "INJECTOR CLEANER CONCENTRATE 200ML",
+          "quantity": 1.0,
+          "unit_price": 170000,
+          "amount": 153000
+        },
+        {
+          "description": "SUPER ENGINE CONDITIONER + FLUSHING 110X",
+          "quantity": 1.0,
+          "unit_price": 210000,
+          "amount": 189000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.95,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 1336100,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "TOTAL MATERIAL : 1,336,100"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 115.15,
+      "usage": {
+        "prompt_tokens": 1832,
+        "completion_tokens": 10044,
+        "total_tokens": 11876
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 1336100, total is 1336100"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "fail",
+          "fields": [],
+          "detail": "rows [0, 1, 2, 3, 5, 6, 7] off by more than 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

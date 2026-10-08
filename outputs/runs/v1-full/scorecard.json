@@ -1,0 +1,1777 @@
+{
+  "run": {
+    "run_id": "v1-full",
+    "api_url": "http://api:8000",
+    "git_commit": "unknown",
+    "started_at": "2026-10-08T03:04:14+00:00",
+    "finished_at": "2026-10-08T03:09:23+00:00",
+    "model": "dots-studio/dots-3-note-preview:free",
+    "prompt_version": "v1",
+    "fields_scored": [
+      "merchant_name",
+      "transaction_date",
+      "subtotal",
+      "discount",
+      "service_charge",
+      "tax",
+      "total",
+      "payment_method",
+      "document_type",
+      "line_items"
+    ],
+    "documents": 18
+  },
+  "summary": {
+    "value_fields": {
+      "correct": 119,
+      "total": 144,
+      "accuracy": 0.826
+    },
+    "hallucinated": 11,
+    "error_documents": 0,
+    "failures": [
+      {
+        "file": "food_receipts02.jpeg",
+        "field": "subtotal",
+        "class": "hallucinated"
+      },
+      {
+        "file": "food_receipts03.jpeg",
+        "field": "merchant_name",
+        "class": "wrong_value"
+      },
+      {
+        "file": "fuel_receipts01.jpg",
+        "field": "discount",
+        "class": "missed"
+      },
+      {
+        "file": "fuel_receipts02.jpg",
+        "field": "payment_method",
+        "class": "wrong_value"
+      },
+      {
+        "file": "service_receipts01.jpg",
+        "field": "subtotal",
+        "class": "hallucinated"
+      },
+      {
+        "file": "service_receipts01.jpg",
+        "field": "discount",
+        "class": "hallucinated"
+      },
+      {
+        "file": "service_receipts01.jpg",
+        "field": "service_charge",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_food_receipts04.jpg",
+        "field": "merchant_name",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_food_receipts04.jpg",
+        "field": "service_charge",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_food_receipts04.jpg",
+        "field": "payment_method",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_fuel_receipts03.jpg",
+        "field": "payment_method",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_invoice02.pdf",
+        "field": "transaction_date",
+        "class": "missed"
+      },
+      {
+        "file": "test_service_note02.jpg",
+        "field": "service_charge",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_service_note03.jpg",
+        "field": "merchant_name",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_service_note03.jpg",
+        "field": "discount",
+        "class": "missed"
+      },
+      {
+        "file": "test_service_note03.jpg",
+        "field": "payment_method",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_service_note05.jpg",
+        "field": "service_charge",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_service_note05.jpg",
+        "field": "tax",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_service_note06.jpg",
+        "field": "subtotal",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_service_note06.jpg",
+        "field": "discount",
+        "class": "missed"
+      },
+      {
+        "file": "test_service_note07.jpg",
+        "field": "merchant_name",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_service_note07.jpg",
+        "field": "subtotal",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_service_note07.jpg",
+        "field": "discount",
+        "class": "wrong_value"
+      },
+      {
+        "file": "test_service_note07.jpg",
+        "field": "service_charge",
+        "class": "hallucinated"
+      },
+      {
+        "file": "test_service_note07.jpg",
+        "field": "payment_method",
+        "class": "hallucinated"
+      }
+    ],
+    "fields": {
+      "merchant_name": {
+        "correct": 14,
+        "wrong_value": 4,
+        "missed": 0,
+        "hallucinated": 0,
+        "error": 0,
+        "accuracy": 0.778
+      },
+      "transaction_date": {
+        "correct": 17,
+        "wrong_value": 0,
+        "missed": 1,
+        "hallucinated": 0,
+        "error": 0,
+        "accuracy": 0.944
+      },
+      "subtotal": {
+        "correct": 14,
+        "wrong_value": 1,
+        "missed": 0,
+        "hallucinated": 3,
+        "error": 0,
+        "accuracy": 0.778
+      },
+      "discount": {
+        "correct": 13,
+        "wrong_value": 1,
+        "missed": 3,
+        "hallucinated": 1,
+        "error": 0,
+        "accuracy": 0.722
+      },
+      "service_charge": {
+        "correct": 13,
+        "wrong_value": 1,
+        "missed": 0,
+        "hallucinated": 4,
+        "error": 0,
+        "accuracy": 0.722
+      },
+      "tax": {
+        "correct": 17,
+        "wrong_value": 0,
+        "missed": 0,
+        "hallucinated": 1,
+        "error": 0,
+        "accuracy": 0.944
+      },
+      "total": {
+        "correct": 18,
+        "wrong_value": 0,
+        "missed": 0,
+        "hallucinated": 0,
+        "error": 0,
+        "accuracy": 1.0
+      },
+      "payment_method": {
+        "correct": 13,
+        "wrong_value": 3,
+        "missed": 0,
+        "hallucinated": 2,
+        "error": 0,
+        "accuracy": 0.722
+      },
+      "document_type": {
+        "correct": 17,
+        "wrong_value": 1,
+        "missed": 0,
+        "hallucinated": 0,
+        "error": 0,
+        "accuracy": 0.944
+      }
+    },
+    "by_document_type": {
+      "food": {
+        "correct": 20,
+        "total": 24,
+        "accuracy": 0.833
+      },
+      "fuel": {
+        "correct": 29,
+        "total": 32,
+        "accuracy": 0.906
+      },
+      "retail": {
+        "correct": 22,
+        "total": 24,
+        "accuracy": 0.917
+      },
+      "vehicle_service": {
+        "correct": 48,
+        "total": 64,
+        "accuracy": 0.75
+      }
+    },
+    "by_split": {
+      "dev": {
+        "correct": 49,
+        "total": 56,
+        "accuracy": 0.875
+      },
+      "test": {
+        "correct": 70,
+        "total": 88,
+        "accuracy": 0.795
+      }
+    },
+    "line_items": {
+      "matched": 67,
+      "missing": 4,
+      "extra": 5,
+      "precision": 0.931,
+      "recall": 0.944
+    },
+    "total_tokens": 25445,
+    "cached_documents": 15,
+    "provider_latency_seconds": {
+      "median": 94.21,
+      "max": 130.6
+    }
+  },
+  "documents": [
+    {
+      "file": "food_receipts01.jpeg",
+      "split": "dev",
+      "document_type": "food",
+      "http_status": 200,
+      "wall_seconds": 0.03,
+      "fields": {
+        "merchant_name": {
+          "expected": "Rumah Kecil Talenta",
+          "extracted": "Rumah Kecil Talenta M Bloc",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-10-03",
+          "extracted": "2026-10-03",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 140000,
+          "extracted": 140000,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": 7000,
+          "extracted": 7000,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": 14700,
+          "extracted": 14700,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 161700,
+          "extracted": 161700,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "qris",
+          "extracted": "qris",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "food",
+          "extracted": "food",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 4,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 108.34,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 6400,
+        "total_tokens": 8157
+      },
+      "cached": true
+    },
+    {
+      "file": "food_receipts02.jpeg",
+      "split": "dev",
+      "document_type": "retail",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "Total Buah Segar",
+          "extracted": "TOTAL BUAH SEGAR",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-09-30",
+          "extracted": "2026-09-30",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": 164200,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 164200,
+          "extracted": 164200,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "debit",
+          "extracted": "debit",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "retail",
+          "extracted": "retail",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 6,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 141.03,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 9194,
+        "total_tokens": 10951
+      },
+      "cached": true
+    },
+    {
+      "file": "food_receipts03.jpeg",
+      "split": "dev",
+      "document_type": "food",
+      "http_status": 200,
+      "wall_seconds": 0.0,
+      "fields": {
+        "merchant_name": {
+          "expected": "Toko Kopi Tuku",
+          "extracted": "TOKO KOPI TUKU EVERPLATE SUDIRMAN [CLOUD]",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "wrong_value"
+        },
+        "transaction_date": {
+          "expected": "2026-10-06",
+          "extracted": "2026-10-06",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 81000,
+          "extracted": 81000,
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.5,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.5,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": 7364,
+          "extracted": 7364,
+          "status": "present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 81000,
+          "extracted": 81000,
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "other",
+          "extracted": "other",
+          "status": "present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "food",
+          "extracted": "food",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 2,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 150.13,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 10118,
+        "total_tokens": 11875
+      },
+      "cached": true
+    },
+    {
+      "file": "fuel_receipts01.jpg",
+      "split": "dev",
+      "document_type": "fuel",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "Vivo",
+          "extracted": "VIVO CIPONDOH",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2025-09-15",
+          "extracted": "2025-09-15",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": 0,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "missed"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 50000,
+          "extracted": 50000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "cash",
+          "extracted": "cash",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "fuel",
+          "extracted": "fuel",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 1,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 119.11,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 7463,
+        "total_tokens": 9220
+      },
+      "cached": true
+    },
+    {
+      "file": "fuel_receipts02.jpg",
+      "split": "dev",
+      "document_type": "fuel",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "BP AKR",
+          "extracted": "JOGLO RAYA Station",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-03-06",
+          "extracted": "2026-03-06",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 39695,
+          "extracted": 39695,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 39695,
+          "extracted": 39695,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "card",
+          "extracted": "cash",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "wrong_value"
+        },
+        "document_type": {
+          "expected": "fuel",
+          "extracted": "fuel",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 1,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 167.73,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 10043,
+        "total_tokens": 11725
+      },
+      "cached": true
+    },
+    {
+      "file": "invoice01.jpeg",
+      "split": "dev",
+      "document_type": "retail",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "Q-Cell",
+          "extracted": "Q-CELL",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2020-11-29",
+          "extracted": "2020-11-29",
+          "status": "present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 5650000,
+          "extracted": 5650000,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "retail",
+          "extracted": "retail",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 1,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 56.52,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1757,
+        "completion_tokens": 3222,
+        "total_tokens": 4979
+      },
+      "cached": true
+    },
+    {
+      "file": "service_receipts01.jpg",
+      "split": "dev",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "Modifikasi Ori",
+          "extracted": "MODIFIKASI ORI Speedshop Bekasi - JAS",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-09-30",
+          "extracted": "2026-09-30",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": 169000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": 12500,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "service_charge": {
+          "expected": 1690,
+          "extracted": 1890,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "wrong_value"
+        },
+        "tax": {
+          "expected": 0,
+          "extracted": 0,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 170690,
+          "extracted": 170690,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "qris",
+          "extracted": "qris",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 3,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 126.26,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1429,
+        "completion_tokens": 7903,
+        "total_tokens": 9332
+      },
+      "cached": true
+    },
+    {
+      "file": "test_food_receipts04.jpg",
+      "split": "test",
+      "document_type": "food",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "Hangry",
+          "extracted": "nandes Ayam Penyet Gojek",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "wrong_value"
+        },
+        "transaction_date": {
+          "expected": "2026-10-06",
+          "extracted": "2026-10-06",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 40901,
+          "extracted": 40901,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": 20500,
+          "extracted": 20500,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": 1855,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "tax": {
+          "expected": 1855,
+          "extracted": 1855,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 20401,
+          "extracted": 20401,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "other",
+          "extracted": "cash",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "wrong_value"
+        },
+        "document_type": {
+          "expected": "food",
+          "extracted": "food",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 0,
+        "missing": 1,
+        "extra": 2
+      },
+      "provider_latency_seconds": 108.6,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1782,
+        "completion_tokens": 6905,
+        "total_tokens": 8687
+      },
+      "cached": true
+    },
+    {
+      "file": "test_fuel_receipts03.jpg",
+      "split": "test",
+      "document_type": "fuel",
+      "http_status": 200,
+      "wall_seconds": 84.36,
+      "fields": {
+        "merchant_name": {
+          "expected": "BP AKR",
+          "extracted": "BPAKR MARGONDA RAYA",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2025-11-08",
+          "extracted": "2025-11-08",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 43518,
+          "extracted": 43518,
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": 0,
+          "extracted": 0,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 43518,
+          "extracted": 43518,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "card",
+          "extracted": "transfer",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "wrong_value"
+        },
+        "document_type": {
+          "expected": "fuel",
+          "extracted": "fuel",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 1,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 84.23,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1370,
+        "completion_tokens": 5182,
+        "total_tokens": 6552
+      },
+      "cached": false
+    },
+    {
+      "file": "test_fuel_receipts04.jpg",
+      "split": "test",
+      "document_type": "fuel",
+      "http_status": 200,
+      "wall_seconds": 0.0,
+      "fields": {
+        "merchant_name": {
+          "expected": "Pertamina",
+          "extracted": "PERTAMINA SPBU S Parman",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2025-11-10",
+          "extracted": "2025-11-10",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 60000,
+          "extracted": 60000,
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "cash",
+          "extracted": "cash",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "fuel",
+          "extracted": "fuel",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 1,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 73.07,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 3871,
+        "total_tokens": 5553
+      },
+      "cached": true
+    },
+    {
+      "file": "test_invoice02.pdf",
+      "split": "test",
+      "document_type": "retail",
+      "http_status": 200,
+      "wall_seconds": 0.2,
+      "fields": {
+        "merchant_name": {
+          "expected": "Dachin Mitra Sukses",
+          "extracted": "DACHIN MITRA SUKSES PT.",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-10-07",
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "missed"
+        },
+        "subtotal": {
+          "expected": 4863140,
+          "extracted": 4863140,
+          "status": "present",
+          "confidence": 0.99,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": 534945,
+          "extracted": 534945,
+          "status": "present",
+          "confidence": 0.99,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 5398085,
+          "extracted": 5398085,
+          "status": "present",
+          "confidence": 0.99,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "retail",
+          "extracted": "retail",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 10,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 102.81,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 3019,
+        "completion_tokens": 7310,
+        "total_tokens": 10329
+      },
+      "cached": true
+    },
+    {
+      "file": "test_service_note01.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 0.0,
+      "fields": {
+        "merchant_name": {
+          "expected": "Absolute",
+          "extracted": "Absolute",
+          "status": "present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-09-22",
+          "extracted": "2026-09-22",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 7765000,
+          "extracted": 7765000,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 11,
+        "missing": 1,
+        "extra": 1
+      },
+      "provider_latency_seconds": 172.12,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 882,
+        "completion_tokens": 12336,
+        "total_tokens": 13218
+      },
+      "cached": true
+    },
+    {
+      "file": "test_service_note02.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 0.0,
+      "fields": {
+        "merchant_name": {
+          "expected": "Aan Automobil",
+          "extracted": "AAN AUTOMOBIL (BGR)",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-09-05",
+          "extracted": "2026-09-05",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 125000,
+          "extracted": 125000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": 0,
+          "extracted": 0,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": 125000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 125000,
+          "extracted": 125000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": "qris",
+          "extracted": "qris",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 2,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 138.1,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1744,
+        "completion_tokens": 9062,
+        "total_tokens": 10806
+      },
+      "cached": true
+    },
+    {
+      "file": "test_service_note03.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 0.0,
+      "fields": {
+        "merchant_name": {
+          "expected": "PT. Delta Perdana Mobilindo",
+          "extracted": "DELTA PERTOYA MOBILINDO",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "wrong_value"
+        },
+        "transaction_date": {
+          "expected": "2026-09-28",
+          "extracted": "2026-09-28",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 8600000,
+          "extracted": 8600000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": 0,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.99,
+          "class": "missed"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.99,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.99,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 8600000,
+          "extracted": 8600000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": "transfer",
+          "status": "present",
+          "confidence": 0.9,
+          "class": "hallucinated"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "retail",
+          "class": "wrong_value"
+        }
+      },
+      "line_items": {
+        "matched": 4,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 138.4,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1234,
+        "completion_tokens": 9030,
+        "total_tokens": 10264
+      },
+      "cached": true
+    },
+    {
+      "file": "test_service_note04.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 0.0,
+      "fields": {
+        "merchant_name": {
+          "expected": "PT. Srikandi Diamond Motors",
+          "extracted": "PT. Srikandi Diamond Motors",
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-09-26",
+          "extracted": "2026-09-26",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 1336100,
+          "extracted": 1336100,
+          "status": "present",
+          "confidence": 0.98,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 8,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 152.91,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1656,
+        "completion_tokens": 10324,
+        "total_tokens": 11980
+      },
+      "cached": true
+    },
+    {
+      "file": "test_service_note05.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 130.61,
+      "fields": {
+        "merchant_name": {
+          "expected": "Terus Jaya Motor",
+          "extracted": "TERUS JAYA MOTOR",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-10-03",
+          "extracted": "2026-10-03",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "discount": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": 120000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "tax": {
+          "expected": null,
+          "extracted": 11,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "hallucinated"
+        },
+        "total": {
+          "expected": 341000,
+          "extracted": 341000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 4,
+        "missing": 2,
+        "extra": 2
+      },
+      "provider_latency_seconds": 130.6,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1617,
+        "completion_tokens": 9492,
+        "total_tokens": 11109
+      },
+      "cached": false
+    },
+    {
+      "file": "test_service_note06.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 0.01,
+      "fields": {
+        "merchant_name": {
+          "expected": "CV Intan Mulia",
+          "extracted": "CV INTAN MULIA 10136",
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "transaction_date": {
+          "expected": "2026-10-04",
+          "extracted": "2026-10-04",
+          "status": "present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": null,
+          "extracted": 435000,
+          "status": "present",
+          "confidence": 0.9,
+          "class": "hallucinated"
+        },
+        "discount": {
+          "expected": 0,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "missed"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "tax": {
+          "expected": 0,
+          "extracted": 0,
+          "status": "present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 435000,
+          "extracted": 435000,
+          "status": "present",
+          "confidence": 1.0,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": null,
+          "status": "not_present",
+          "confidence": 0.9,
+          "class": "correct"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 5,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 154.19,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 10426,
+        "total_tokens": 12108
+      },
+      "cached": true
+    },
+    {
+      "file": "test_service_note07.jpg",
+      "split": "test",
+      "document_type": "vehicle_service",
+      "http_status": 200,
+      "wall_seconds": 94.21,
+      "fields": {
+        "merchant_name": {
+          "expected": "Astra Otoservice",
+          "extracted": "PT. ARDENDI JAYA SENT",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "wrong_value"
+        },
+        "transaction_date": {
+          "expected": "2026-09-27",
+          "extracted": "2026-09-27",
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "subtotal": {
+          "expected": 325225,
+          "extracted": 361000,
+          "status": "present",
+          "confidence": 0.9,
+          "class": "wrong_value"
+        },
+        "discount": {
+          "expected": 0,
+          "extracted": 25000,
+          "status": "present",
+          "confidence": 0.9,
+          "class": "wrong_value"
+        },
+        "service_charge": {
+          "expected": null,
+          "extracted": 157000,
+          "status": "present",
+          "confidence": 0.5,
+          "class": "hallucinated"
+        },
+        "tax": {
+          "expected": 35775,
+          "extracted": 35775,
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "total": {
+          "expected": 361000,
+          "extracted": 361000,
+          "status": "present",
+          "confidence": 0.95,
+          "class": "correct"
+        },
+        "payment_method": {
+          "expected": null,
+          "extracted": "card",
+          "status": "present",
+          "confidence": 0.9,
+          "class": "hallucinated"
+        },
+        "document_type": {
+          "expected": "vehicle_service",
+          "extracted": "vehicle_service",
+          "class": "correct"
+        }
+      },
+      "line_items": {
+        "matched": 3,
+        "missing": 0,
+        "extra": 0
+      },
+      "provider_latency_seconds": 94.21,
+      "attempts": 1,
+      "usage": {
+        "prompt_tokens": 1734,
+        "completion_tokens": 6050,
+        "total_tokens": 7784
+      },
+      "cached": false
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "file": "test_service_note06.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.01,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "CV INTAN MULIA 10136",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "CV INTAN MULIA 10136"
+      },
+      "transaction_date": {
+        "value": "2026-10-04",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Masuk: 2026-10-04"
+      },
+      "line_items": [
+        {
+          "description": "OLI MPX2 10W30 SL 0,8L IDE",
+          "quantity": 1.0,
+          "unit_price": 79000,
+          "amount": 79000
+        },
+        {
+          "description": "SCOOTER GEAR OIL-SYN120MLREP",
+          "quantity": 1.0,
+          "unit_price": 23000,
+          "amount": 23000
+        },
+        {
+          "description": "WEIGHT SET CLUCTH",
+          "quantity": 1.0,
+          "unit_price": 149000,
+          "amount": 149000
+        },
+        {
+          "description": "QS SERVICE",
+          "quantity": 1.0,
+          "unit_price": 95000,
+          "amount": 95000
+        },
+        {
+          "description": "LR CVT & PASANG KAMPAS GANDA",
+          "quantity": 1.0,
+          "unit_price": 89000,
+          "amount": 89000
+        }
+      ],
+      "subtotal": {
+        "value": 435000,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Jumlah 435.000"
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.9,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.9,
+        "evidence": null
+      },
+      "tax": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Pajak 0"
+      },
+      "total": {
+        "value": 435000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total 435.000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.9,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 154.19,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 10426,
+        "total_tokens": 12108
+      },
+      "cached": true
+    }
+  }
+}

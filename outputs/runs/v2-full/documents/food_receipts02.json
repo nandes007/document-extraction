@@ -1,0 +1,131 @@
+{
+  "file": "food_receipts02.jpeg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "TOTAL BUAH SEGAR",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "TOTAL BUAH SEGAR"
+      },
+      "transaction_date": {
+        "value": "2026-09-30",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "30/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "DRAGON FRUIT MERAH KUPAS LOKAL",
+          "quantity": 0.3,
+          "unit_price": 50500,
+          "amount": 15150
+        },
+        {
+          "description": "ANGGUR SHINE MUSCAT RRC 500g",
+          "quantity": 1.0,
+          "unit_price": 33500,
+          "amount": 33500
+        },
+        {
+          "description": "ANGGUR SHINE MUSCAT RRC 500g",
+          "quantity": 1.0,
+          "unit_price": 33500,
+          "amount": 33500
+        },
+        {
+          "description": "JERUK MUDA THUMB/BIFI ISI 12",
+          "quantity": 1.0,
+          "unit_price": 38500,
+          "amount": 38500
+        },
+        {
+          "description": "JERUK SAFOURER AUSTRALIA KECIL",
+          "quantity": 0.46,
+          "unit_price": 67500,
+          "amount": 31050
+        },
+        {
+          "description": "NESTLE MILO NUGGETS 25g",
+          "quantity": 1.0,
+          "unit_price": 12500,
+          "amount": 12500
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "total": {
+        "value": 164200,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "TOTAL ITEM = Rp 164,200"
+      },
+      "payment_method": {
+        "value": "debit",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "DEBIT"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 128.49,
+      "usage": {
+        "prompt_tokens": 1933,
+        "completion_tokens": 10170,
+        "total_tokens": 12103
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 164200, total is 164200"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "6 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

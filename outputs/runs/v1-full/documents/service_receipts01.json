@@ -1,0 +1,90 @@
+{
+  "file": "service_receipts01.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.01,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "MODIFIKASI ORI Speedshop Bekasi - JAS",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "MODIFIKASI ORI Speedshop Bekasi - JAS"
+      },
+      "transaction_date": {
+        "value": "2026-09-30",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "30/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "JASA GANTI OLI FREE",
+          "quantity": 1.0,
+          "unit_price": 0,
+          "amount": 0
+        },
+        {
+          "description": "OLI MESIN EXPERT LE 10W-40 1 LTR MOTUL",
+          "quantity": 1.0,
+          "unit_price": 134000,
+          "amount": 134000
+        },
+        {
+          "description": "OLI GEAR SCOOTER GEAR 80W-90 120 ML MOTUL",
+          "quantity": 1.0,
+          "unit_price": 35000,
+          "amount": 35000
+        }
+      ],
+      "subtotal": {
+        "value": 169000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "169.000"
+      },
+      "discount": {
+        "value": 12500,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "SELANJUTNYA RP.12.500"
+      },
+      "service_charge": {
+        "value": 1890,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "1.890"
+      },
+      "tax": {
+        "value": 0,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "C"
+      },
+      "total": {
+        "value": 170690,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "170.690"
+      },
+      "payment_method": {
+        "value": "qris",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "QRIS"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 126.26,
+      "usage": {
+        "prompt_tokens": 1429,
+        "completion_tokens": 7903,
+        "total_tokens": 9332
+      },
+      "cached": true
+    }
+  }
+}

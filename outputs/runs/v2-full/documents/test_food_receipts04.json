@@ -1,0 +1,148 @@
+{
+  "file": "test_food_receipts04.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "nandes Ayam Penyet Gojek",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "nandes Ayam Penyet Gojek"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "06-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "Paket Lengkap Spesial Ayam Goreng Mak Dura",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 40900
+        },
+        {
+          "description": "Nasi Ayam Goreng Mak Dura",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Nasi Putih",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Penyet Paha Bawah / Sayap",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Sambal Matah",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 1
+        },
+        {
+          "description": "Extra Kulit",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Es Teh Manis",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Perlu Alat Makan",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        }
+      ],
+      "subtotal": {
+        "value": 40901,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Subtotal : 40.901"
+      },
+      "discount": {
+        "value": 20500,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Diskon Voucher : -20.500"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 1855,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "PB1 : 1.855"
+      },
+      "total": {
+        "value": 20401,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Total : 20.401"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 98.12,
+      "usage": {
+        "prompt_tokens": 1958,
+        "completion_tokens": 7934,
+        "total_tokens": 9892
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 40901, subtotal is 40901"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "discount",
+            "tax",
+            "total"
+          ],
+          "detail": "tax-inclusive: 20401 == 20401"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "skipped",
+          "fields": [],
+          "detail": "no row has quantity, unit price and amount"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

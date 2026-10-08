@@ -1,0 +1,160 @@
+{
+  "file": "service_receipts01.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "MODIFIKASI ORI Speedshop Bekasi - JAS",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "MODIFIKASI ORI Speedshop Bekasi - JAS"
+      },
+      "transaction_date": {
+        "value": "2026-09-30",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "30/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "JASA GANTI OLI FREE",
+          "quantity": 1.0,
+          "unit_price": 0,
+          "amount": 0
+        },
+        {
+          "description": "OLI MESIN EXPERT LE 10W-40 1 LTR MOTUL",
+          "quantity": 1.0,
+          "unit_price": 134000,
+          "amount": 134000
+        },
+        {
+          "description": "OLI GEAR SCOOTER GEAR 80W-90 120 ML MOTUL",
+          "quantity": 1.0,
+          "unit_price": 35000,
+          "amount": 35000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "payment_method": {
+        "value": "qris",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "QRIS"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 126.26,
+      "usage": {
+        "prompt_tokens": 1429,
+        "completion_tokens": 7903,
+        "total_tokens": 9332
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 169000, subtotal is 169000"
+        },
+        {
+          "name": "totals",
+          "result": "fail",
+          "fields": [
+            "subtotal",
+            "discount",
+            "service_charge",
+            "tax",
+            "total"
+          ],
+          "detail": "158390 (or 158390 without tax) != 170690"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "3 row(s) within 1%"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "subtotal",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 169000,
+          "confidence": 1.0
+        },
+        {
+          "field": "discount",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 12500,
+          "confidence": 1.0
+        },
+        {
+          "field": "service_charge",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 1890,
+          "confidence": 1.0
+        },
+        {
+          "field": "tax",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 0,
+          "confidence": 1.0
+        },
+        {
+          "field": "total",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 170690,
+          "confidence": 1.0
+        }
+      ]
+    }
+  }
+}

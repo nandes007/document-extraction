@@ -1,0 +1,84 @@
+{
+  "file": "test_food_receipts04.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.01,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "nandes Ayam Penyet Gojek",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "nandes Ayam Penyet Gojek"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "06-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "line item 1",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 40900
+        },
+        {
+          "description": "line item 2",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 40900
+        }
+      ],
+      "subtotal": {
+        "value": 40901,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Subtotal :  40.901"
+      },
+      "discount": {
+        "value": 20500,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Diskon Voucher : -20.500"
+      },
+      "service_charge": {
+        "value": 1855,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "PB1 : 1.855"
+      },
+      "tax": {
+        "value": 1855,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "PB1 : 1.855"
+      },
+      "total": {
+        "value": 20401,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total   :                   20.401"
+      },
+      "payment_method": {
+        "value": "cash",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Delivery"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 108.6,
+      "usage": {
+        "prompt_tokens": 1782,
+        "completion_tokens": 6905,
+        "total_tokens": 8687
+      },
+      "cached": true
+    }
+  }
+}

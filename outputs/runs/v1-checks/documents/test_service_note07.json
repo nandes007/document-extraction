@@ -1,0 +1,161 @@
+{
+  "file": "test_service_note07.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "PT. ARDENDI JAYA SENT",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "ASTRA Otoservice / PT. ARDENDI JAYA SENT"
+      },
+      "transaction_date": {
+        "value": "2026-09-27",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Invoice Date : 27/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "ABN AGYA/AYLA MNL13 - NOW MIRA NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 229000,
+          "amount": 204000
+        },
+        {
+          "description": "SRV4W ENG SPARK PLUG REPLACE NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 76000,
+          "amount": 76000
+        },
+        {
+          "description": "SRV4W BRAKE PAD KIT FR 2S NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 81000,
+          "amount": 81000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.9,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.9,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.5,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.95,
+        "evidence": null
+      },
+      "total": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.95,
+        "evidence": null
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Card/Qris/VA: 361,000"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 94.21,
+      "usage": {
+        "prompt_tokens": 1734,
+        "completion_tokens": 6050,
+        "total_tokens": 7784
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 361000, subtotal is 361000"
+        },
+        {
+          "name": "totals",
+          "result": "fail",
+          "fields": [
+            "subtotal",
+            "discount",
+            "service_charge",
+            "tax",
+            "total"
+          ],
+          "detail": "528775 (or 493000 without tax) != 361000"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "fail",
+          "fields": [],
+          "detail": "rows [0] off by more than 1%"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "subtotal",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 361000,
+          "confidence": 0.9
+        },
+        {
+          "field": "discount",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 25000,
+          "confidence": 0.9
+        },
+        {
+          "field": "service_charge",
+          "reason": [
+            "check:totals",
+            "low_confidence"
+          ],
+          "value": 157000,
+          "confidence": 0.5
+        },
+        {
+          "field": "tax",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 35775,
+          "confidence": 0.95
+        },
+        {
+          "field": "total",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 361000,
+          "confidence": 0.95
+        }
+      ]
+    }
+  }
+}

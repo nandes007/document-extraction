@@ -1,0 +1,145 @@
+{
+  "file": "test_service_note02.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "AAN AUTOMOBIL (BGR)",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "AAN AUTOMOBIL (BGR)"
+      },
+      "transaction_date": {
+        "value": "2026-09-05",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "05-Sep-2026"
+      },
+      "line_items": [
+        {
+          "description": "GT BEARING RODA DEPAN",
+          "quantity": 1.0,
+          "unit_price": 75000,
+          "amount": 75000
+        },
+        {
+          "description": "ANALISA",
+          "quantity": 1.0,
+          "unit_price": 50000,
+          "amount": 50000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "payment_method": {
+        "value": "qris",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "QRIS"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 138.1,
+      "usage": {
+        "prompt_tokens": 1744,
+        "completion_tokens": 9062,
+        "total_tokens": 10806
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 125000, subtotal is 125000"
+        },
+        {
+          "name": "totals",
+          "result": "fail",
+          "fields": [
+            "subtotal",
+            "discount",
+            "service_charge",
+            "total"
+          ],
+          "detail": "250000 (or 250000 without tax) != 125000"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "2 row(s) within 1%"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "subtotal",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 125000,
+          "confidence": 1.0
+        },
+        {
+          "field": "discount",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 0,
+          "confidence": 1.0
+        },
+        {
+          "field": "service_charge",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 125000,
+          "confidence": 1.0
+        },
+        {
+          "field": "total",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 125000,
+          "confidence": 1.0
+        }
+      ]
+    }
+  }
+}

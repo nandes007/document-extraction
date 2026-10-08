@@ -1,0 +1,108 @@
+{
+  "file": "test_service_note05.jpg",
+  "http_status": 200,
+  "wall_seconds": 130.61,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "TERUS JAYA MOTOR",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "TERUS JAYA MOTOR"
+      },
+      "transaction_date": {
+        "value": "2026-10-03",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "03/10/2026"
+      },
+      "line_items": [
+        {
+          "description": "Ganti Air Radiator",
+          "quantity": 1.0,
+          "unit_price": 15000,
+          "amount": 15000
+        },
+        {
+          "description": "Ganti Kampas Rem Belakang",
+          "quantity": 1.0,
+          "unit_price": 20000,
+          "amount": 20000
+        },
+        {
+          "description": "Service Ringan",
+          "quantity": 1.0,
+          "unit_price": 85000,
+          "amount": 85000
+        },
+        {
+          "description": "YAMALUBE SUPER SPOR YAMALUBE YAMACOOLA BRAKE PAD KIT 2 (COOL)",
+          "quantity": 1.0,
+          "unit_price": 110000,
+          "amount": 110000
+        },
+        {
+          "description": "OTHERS",
+          "quantity": 1.0,
+          "unit_price": 29000,
+          "amount": 29000
+        },
+        {
+          "description": "OTHERS",
+          "quantity": 1.0,
+          "unit_price": 82000,
+          "amount": 82000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": 120000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total Service Rp. 120,000"
+      },
+      "tax": {
+        "value": 11,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Harga sudah termasuk PPN 11%"
+      },
+      "total": {
+        "value": 341000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total Bayar Rp. 341,000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 130.6,
+      "usage": {
+        "prompt_tokens": 1617,
+        "completion_tokens": 9492,
+        "total_tokens": 11109
+      },
+      "cached": false
+    }
+  }
+}

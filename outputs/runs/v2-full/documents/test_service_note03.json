@@ -1,0 +1,132 @@
+{
+  "file": "test_service_note03.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "DELTA PERTOYA MOBILINDO",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "DELTA PERTOYA MOBILINDO"
+      },
+      "transaction_date": {
+        "value": "2026-09-28",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Tanggal : 28 September 2026"
+      },
+      "line_items": [
+        {
+          "description": "XFP 0387C",
+          "quantity": 1.0,
+          "unit_price": 1000000,
+          "amount": 1000000
+        },
+        {
+          "description": "9+ 0377C",
+          "quantity": 1.0,
+          "unit_price": 5000000,
+          "amount": 5000000
+        },
+        {
+          "description": "SELECTOR DIGITAL",
+          "quantity": 1.0,
+          "unit_price": 1100000,
+          "amount": 1100000
+        },
+        {
+          "description": "RMPF EDU STD",
+          "quantity": 1.0,
+          "unit_price": 1500000,
+          "amount": 1500000
+        }
+      ],
+      "subtotal": {
+        "value": 8600000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Subtotal : 8,600,000.00"
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Potongan 0.00% : 0.00"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.9,
+        "evidence": "not present in totals"
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.9,
+        "evidence": "not present in totals"
+      },
+      "total": {
+        "value": 8600000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Jumlah hrs di Bayar : 8,600,000.00"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.8,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 88.03,
+      "usage": {
+        "prompt_tokens": 1410,
+        "completion_tokens": 7314,
+        "total_tokens": 8724
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 8600000, subtotal is 8600000"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "discount",
+            "total"
+          ],
+          "detail": "8600000 == 8600000"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "4 row(s) within 1%"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "payment_method",
+          "reason": [
+            "low_confidence"
+          ],
+          "value": "other",
+          "confidence": 0.8
+        }
+      ]
+    }
+  }
+}

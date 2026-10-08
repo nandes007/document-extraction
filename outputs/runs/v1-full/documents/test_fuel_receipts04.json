@@ -1,0 +1,78 @@
+{
+  "file": "test_fuel_receipts04.jpg",
+  "http_status": 200,
+  "wall_seconds": 0.0,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "PERTAMINA SPBU S Parman",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "PERTAMINA SPBU S Parman"
+      },
+      "transaction_date": {
+        "value": "2025-11-10",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "10/11/2025"
+      },
+      "line_items": [
+        {
+          "description": "PERTAMAX_TURBO",
+          "quantity": 4.58,
+          "unit_price": 13100,
+          "amount": 60000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 60000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Total Harga : Rp. 60,000"
+      },
+      "payment_method": {
+        "value": "cash",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "CASH"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 73.07,
+      "usage": {
+        "prompt_tokens": 1682,
+        "completion_tokens": 3871,
+        "total_tokens": 5553
+      },
+      "cached": true
+    }
+  }
+}

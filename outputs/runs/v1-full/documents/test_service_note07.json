@@ -1,0 +1,90 @@
+{
+  "file": "test_service_note07.jpg",
+  "http_status": 200,
+  "wall_seconds": 94.21,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "PT. ARDENDI JAYA SENT",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "ASTRA Otoservice / PT. ARDENDI JAYA SENT"
+      },
+      "transaction_date": {
+        "value": "2026-09-27",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Invoice Date : 27/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "ABN AGYA/AYLA MNL13 - NOW MIRA NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 229000,
+          "amount": 204000
+        },
+        {
+          "description": "SRV4W ENG SPARK PLUG REPLACE NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 76000,
+          "amount": 76000
+        },
+        {
+          "description": "SRV4W BRAKE PAD KIT FR 2S NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 81000,
+          "amount": 81000
+        }
+      ],
+      "subtotal": {
+        "value": 361000,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "TOTAL row shows 361,000 before Grand Total line"
+      },
+      "discount": {
+        "value": 25000,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Disc Rp: 25,000 on the first line item; Potongan Pembesian: 0"
+      },
+      "service_charge": {
+        "value": 157000,
+        "status": "present",
+        "confidence": 0.5,
+        "evidence": "JASA / SERVICE subtotal is 157,000"
+      },
+      "tax": {
+        "value": 35775,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "PPN: 35,775, PPN BM: 0"
+      },
+      "total": {
+        "value": 361000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Grand Total (Jasa + Sparepart + Pajak): 361,000"
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Card/Qris/VA: 361,000"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v1",
+      "attempts": 1,
+      "latency_seconds": 94.21,
+      "usage": {
+        "prompt_tokens": 1734,
+        "completion_tokens": 6050,
+        "total_tokens": 7784
+      },
+      "cached": false
+    }
+  }
+}

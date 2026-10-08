@@ -1,0 +1,107 @@
+{
+  "file": "food_receipts03.jpeg",
+  "http_status": 200,
+  "wall_seconds": 0.01,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "TOKO KOPI TUKU EVERPLATE SUDIRMAN [CLOUD]",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "TOKO KOPI TUKU EVERPLATE SUDIRMAN [CLOUD]"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Date : 06-10-2026 12:33"
+      },
+      "line_items": [
+        {
+          "description": "LESS SWEET",
+          "quantity": 2.0,
+          "unit_price": 27000,
+          "amount": 54000
+        },
+        {
+          "description": "LESS SWEET, LESS ICE",
+          "quantity": 1.0,
+          "unit_price": 27000,
+          "amount": 27000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 7364,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Price inclusive of PBJT : 7.364"
+      },
+      "total": {
+        "value": 81000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Grand Total : 81.000"
+      },
+      "payment_method": {
+        "value": "other",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "GOFOOD : 81.000"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 86.28,
+      "usage": {
+        "prompt_tokens": 1933,
+        "completion_tokens": 6851,
+        "total_tokens": 8784
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 81000, total is 81000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "2 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}
