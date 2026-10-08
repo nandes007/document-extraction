@@ -1,0 +1,110 @@
+{
+  "file": "food_receipts03.jpeg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 3.9,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "TOKO KOPI TUKU",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "TOKO KOPI TUKU"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "06-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "Es Kopi Susu Tetangga",
+          "quantity": 2.0,
+          "unit_price": 27000,
+          "amount": 54000
+        },
+        {
+          "description": "Es Kopi Susu Tetangga",
+          "quantity": 1.0,
+          "unit_price": 27000,
+          "amount": 27000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 7364,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "7.364"
+      },
+      "total": {
+        "value": 81000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "81.000"
+      },
+      "payment_method": {
+        "value": "other",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "GOFOOD"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 3.9,
+      "usage": {
+        "prompt_tokens": 3040,
+        "completion_tokens": 536,
+        "total_tokens": 3576,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 81000, total is 81000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "2 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

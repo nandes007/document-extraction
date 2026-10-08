@@ -1,0 +1,104 @@
+{
+  "file": "invoice01.jpeg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 5.59,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "Q-CELL",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Q-CELL"
+      },
+      "transaction_date": {
+        "value": "2020-11-29",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "29.11.20."
+      },
+      "line_items": [
+        {
+          "description": "Iphone 8+",
+          "quantity": 1.0,
+          "unit_price": 5650000,
+          "amount": 5650000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 5650000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "5.650.000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": "low",
+      "attempts": 1,
+      "latency_seconds": 5.58,
+      "usage": {
+        "prompt_tokens": 3040,
+        "completion_tokens": 797,
+        "total_tokens": 3837,
+        "reasoning_tokens": 333
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 5650000, total is 5650000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

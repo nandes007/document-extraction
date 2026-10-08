@@ -1,0 +1,125 @@
+{
+  "file": "service_receipts01.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 4.13,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "Speedshop Bekasi - JAS",
+        "status": "present",
+        "confidence": 0.9000000000000001,
+        "evidence": "Speedshop Bekasi - JAS"
+      },
+      "transaction_date": {
+        "value": "2026-09-30",
+        "status": "present",
+        "confidence": 0.9000000000000001,
+        "evidence": "30/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "JASA GANTI OLI FREE",
+          "quantity": 1.0,
+          "unit_price": 0,
+          "amount": 0
+        },
+        {
+          "description": "OLI MESIN EXPERT LE 10W-40 1 LTR MOTUL",
+          "quantity": 1.0,
+          "unit_price": 134000,
+          "amount": 134000
+        },
+        {
+          "description": "OLI GEAR SCOOTER GEAR 80W-90 120 ML MOTUL",
+          "quantity": 1.0,
+          "unit_price": 35000,
+          "amount": 35000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": 1890,
+        "status": "present",
+        "confidence": 0.9000000000000001,
+        "evidence": "1.890"
+      },
+      "tax": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.9000000000000001,
+        "evidence": "0"
+      },
+      "total": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.9000000000000001,
+        "evidence": null
+      },
+      "payment_method": {
+        "value": "qris",
+        "status": "present",
+        "confidence": 0.9000000000000001,
+        "evidence": "QRIS"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 4.12,
+      "usage": {
+        "prompt_tokens": 3040,
+        "completion_tokens": 696,
+        "total_tokens": 3736,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "fail",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 169000, total is 170690"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "3 row(s) within 1%"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "total",
+          "reason": [
+            "check:line_items_sum"
+          ],
+          "value": 170690,
+          "confidence": 0.9000000000000001
+        }
+      ]
+    }
+  }
+}
