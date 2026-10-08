@@ -84,10 +84,11 @@ uv run pytest
 The `--rescore`, `compare.py` and `check_labels.py` commands also run locally
 with `uv run python ...` (Python 3.12, `uv sync`).
 
-I develop with Podman (`podman compose`). The compose file uses only
-Docker-compatible features and the commands above are the Docker ones.
-TODO(user): confirm `docker compose up -d` and `docker compose run --rm eval`
-on real Docker from a fresh clone; so far they were run with Podman only.
+Tested with both Docker (`docker compose`) and Podman (`podman compose`);
+the compose file uses only Docker-compatible features.
+
+The endpoints, request format, response fields and error codes are documented
+in [docs/api.md](docs/api.md).
 
 ## What it does
 
