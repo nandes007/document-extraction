@@ -1,0 +1,160 @@
+{
+  "file": "test_food_receipts04.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 4.67,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "Hangry",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "HANGRY"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "06-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "Paket Lengkap Spesial Ayam Gore ng Mak Dura",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 40900
+        },
+        {
+          "description": "Nasi Ayam Goreng Mak Dura",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Nasi Putih",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Penyet Paha Bawah / Sayap",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Sambal Matah",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Extra Kulit",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Es Teh Manis",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Perlu Alat Makan",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.99,
+        "evidence": null
+      },
+      "discount": {
+        "value": 20500,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "20.500"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 1855,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "1.855"
+      },
+      "total": {
+        "value": 20401,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "20.401"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 4.66,
+      "usage": {
+        "prompt_tokens": 3040,
+        "completion_tokens": 779,
+        "total_tokens": 3819,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "fail",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 40900, subtotal is 40901"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "discount",
+            "tax",
+            "total"
+          ],
+          "detail": "tax-inclusive: 20401 == 20401"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "skipped",
+          "fields": [],
+          "detail": "no row has quantity, unit price and amount"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "subtotal",
+          "reason": [
+            "check:line_items_sum"
+          ],
+          "value": 40901,
+          "confidence": 0.99
+        }
+      ]
+    }
+  }
+}

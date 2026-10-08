@@ -1,0 +1,116 @@
+{
+  "file": "test_service_note07.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 4.56,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "ASTRA Otoservice",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "ASTRA Otoservice"
+      },
+      "transaction_date": {
+        "value": "2026-09-27",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "27/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "ABN AGYA/AYLA MNL13 - NOW MIRA NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 229000,
+          "amount": 204000
+        },
+        {
+          "description": "SRV4W ENG SPARK PLUG REPLACE NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 76000,
+          "amount": 76000
+        },
+        {
+          "description": "SRV4W BRAKE PAD KIT FR 2S NOSIZE",
+          "quantity": 1.0,
+          "unit_price": 81000,
+          "amount": 81000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 25000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "25,000"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 35775,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "35,775"
+      },
+      "total": {
+        "value": 361000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "361,000"
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "Card/Qris/VA"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 4.56,
+      "usage": {
+        "prompt_tokens": 3556,
+        "completion_tokens": 632,
+        "total_tokens": 4188,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 361000, total is 361000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "fail",
+          "fields": [],
+          "detail": "rows [0] off by more than 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

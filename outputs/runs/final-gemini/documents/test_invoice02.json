@@ -1,0 +1,162 @@
+{
+  "file": "test_invoice02.pdf",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 4.35,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "DACHIN MITRA SUKSES PT.",
+        "status": "present",
+        "confidence": 0.9900000000000001,
+        "evidence": "DACHIN MITRA SUKSES PT."
+      },
+      "transaction_date": {
+        "value": "2026-10-07",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "07-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "ECENTIO THERMOS LED BLACK 500ML",
+          "quantity": 6.0,
+          "unit_price": 55906,
+          "amount": 335433
+        },
+        {
+          "description": "ECENTIO LUNCH BOX FANCY ADVENTURE BLUE",
+          "quantity": 12.0,
+          "unit_price": 41288,
+          "amount": 495461
+        },
+        {
+          "description": "ECENTIO WATER BOTTLE SPORT GREY 750ML",
+          "quantity": 6.0,
+          "unit_price": 14065,
+          "amount": 84390
+        },
+        {
+          "description": "ECENTIO BOTTLE TEA CUP BLUE 780ML",
+          "quantity": 12.0,
+          "unit_price": 18965,
+          "amount": 227580
+        },
+        {
+          "description": "ECENTIO GLASS FLOWER TEA CUP PINK 500ML",
+          "quantity": 12.0,
+          "unit_price": 20417,
+          "amount": 245008
+        },
+        {
+          "description": "ECENTIO LUNCH BAG",
+          "quantity": 12.0,
+          "unit_price": 28402,
+          "amount": 340828
+        },
+        {
+          "description": "ECENTIO TUMBLER COFFEE THERMOS 900ML",
+          "quantity": 6.0,
+          "unit_price": 86811,
+          "amount": 520868
+        },
+        {
+          "description": "FREEMIR COFFEE MILK PAN + GAS STOVE STAND 1.2LT",
+          "quantity": 12.0,
+          "unit_price": 74162,
+          "amount": 889938
+        },
+        {
+          "description": "FREEMIR VEGETABLE CUTTER 6 BLADES BEIGE",
+          "quantity": 12.0,
+          "unit_price": 67355,
+          "amount": 808262
+        },
+        {
+          "description": "FREEMIR COFFEE MILK PAN + GAS STOVE STAND BEIGE",
+          "quantity": 12.0,
+          "unit_price": 76281,
+          "amount": 915372
+        }
+      ],
+      "subtotal": {
+        "value": 4863140,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "4863140"
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 534945,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "534945"
+      },
+      "total": {
+        "value": 5398085,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "5398085"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 4.16,
+      "usage": {
+        "prompt_tokens": 1760,
+        "completion_tokens": 839,
+        "total_tokens": 2599,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 4863140, subtotal is 4863140"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "tax",
+            "total"
+          ],
+          "detail": "5398085 == 5398085"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "10 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}
