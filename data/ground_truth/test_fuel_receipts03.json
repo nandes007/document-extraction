@@ -1,0 +1,56 @@
+{
+  "file": "test_fuel_receipts03.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "photo_on_background",
+    "edc_payment",
+    "tax_not_shown"
+  ],
+  "document_type": "fuel",
+  "merchant_name": {
+    "value": "BP AKR",
+    "status": "present",
+    "accept": [
+      "BPAKR",
+      "BP-AKR",
+      "BP AKR Margonda Raya"
+    ]
+  },
+  "transaction_date": {
+    "value": "2025-11-08",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "BP 92",
+      "quantity": 3.432,
+      "unit_price": 12680,
+      "amount": 43518
+    }
+  ],
+  "subtotal": {
+    "value": 43518,
+    "status": "present"
+  },
+  "discount": {
+    "value": 0,
+    "status": "present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 43518,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "card",
+    "status": "present"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "file": "service_receipts01.jpg",
+  "split": "dev",
+  "tags": [
+    "printed",
+    "photo_on_background",
+    "qris",
+    "charge_percent",
+    "tax_zero_printed",
+    "free_item_zero_amount",
+    "category_totals"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "Modifikasi Ori",
+    "status": "present",
+    "accept": [
+      "MODIFIKASI ORI",
+      "Speedshop Bekasi",
+      "Speedshop Bekasi - JAS",
+      "Modifikasi Ori Speedshop Bekasi"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-09-30",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "JASA GANTI OLI FREE",
+      "quantity": 1,
+      "unit_price": 0,
+      "amount": 0
+    },
+    {
+      "description": "OLI MESIN EXPERT LE 10W-40 1 LTR MOTUL",
+      "quantity": 1,
+      "unit_price": 134000,
+      "amount": 134000
+    },
+    {
+      "description": "OLI GEAR SCOOTER GEAR 80W-90 120 ML MOTUL",
+      "quantity": 1,
+      "unit_price": 35000,
+      "amount": 35000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": 1690,
+    "status": "present"
+  },
+  "tax": {
+    "value": 0,
+    "status": "present"
+  },
+  "total": {
+    "value": 170690,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": "qris",
+    "status": "present"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "file": "test_invoice02.pdf",
+  "split": "test",
+  "tags": [
+    "printed",
+    "multi_page",
+    "pdf",
+    "tax_added",
+    "table_across_pages"
+  ],
+  "document_type": "retail",
+  "merchant_name": {
+    "value": "Dachin Mitra Sukses",
+    "status": "present",
+    "accept": [
+      "PT. Dachin Mitra Sukses",
+      "DACHIN MITRA SUKSES PT."
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-10-07",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "ECENTIO THERMOS LED BLACK 500ML",
+      "quantity": 6,
+      "unit_price": 55906,
+      "amount": 335433
+    },
+    {
+      "description": "ECENTIO KIDS LUNCH BOX FANCY ADVENTURE BLUE",
+      "quantity": 12,
+      "unit_price": 41288,
+      "amount": 495461
+    },
+    {
+      "description": "ECENTIO WATER BOTTLE SPORT GREY 750ML",
+      "quantity": 6,
+      "unit_price": 14065,
+      "amount": 84390
+    },
+    {
+      "description": "ECENTIO BOTTLE TEA CUP BLUE 780ML",
+      "quantity": 12,
+      "unit_price": 18965,
+      "amount": 227580
+    },
+    {
+      "description": "ECENTIO GLASS FLOWER TEA CUP PINK 500ML",
+      "quantity": 12,
+      "unit_price": 20417,
+      "amount": 245008
+    },
+    {
+      "description": "ECENTIO LUNCH BAG",
+      "quantity": 12,
+      "unit_price": 28402,
+      "amount": 340828
+    },
+    {
+      "description": "ECENTIO TUMBLER COFFEE THERMOS 900ML",
+      "quantity": 6,
+      "unit_price": 86811,
+      "amount": 520868
+    },
+    {
+      "description": "FREEMIR COFFEE MILK PAN + GAS STOVE STAND 1.2LT",
+      "quantity": 12,
+      "unit_price": 74162,
+      "amount": 889938
+    },
+    {
+      "description": "FREEMIR VEGETABLE CUTTER 6 BLADES BEIGE",
+      "quantity": 12,
+      "unit_price": 67355,
+      "amount": 808262
+    },
+    {
+      "description": "FREEMIR COFFEE MILK PAN + GAS STOVE STAND BEIGE",
+      "quantity": 12,
+      "unit_price": 76281,
+      "amount": 915372
+    }
+  ],
+  "subtotal": {
+    "value": 4863140,
+    "status": "present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": 534945,
+    "status": "present"
+  },
+  "total": {
+    "value": 5398085,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

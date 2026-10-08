@@ -1,0 +1,83 @@
+{
+  "file": "test_service_note05.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "dot_matrix",
+    "stamp_overlap",
+    "tax_inclusive_rate_only",
+    "lunas_stamp",
+    "skewed"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "Terus Jaya Motor",
+    "status": "present"
+  },
+  "transaction_date": {
+    "value": "2026-10-03",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "Ganti Air Radiator",
+      "quantity": 1,
+      "unit_price": 15000,
+      "amount": 15000
+    },
+    {
+      "description": "Ganti Kampas Rem Belakang",
+      "quantity": 1,
+      "unit_price": 20000,
+      "amount": 20000
+    },
+    {
+      "description": "Service Ringan",
+      "quantity": 1,
+      "unit_price": 85000,
+      "amount": 85000
+    },
+    {
+      "description": "YAMALUBE SUPER SPORT",
+      "quantity": 1,
+      "unit_price": 110000,
+      "amount": 110000
+    },
+    {
+      "description": "YAMALUBE YAMACOOLA",
+      "quantity": 1,
+      "unit_price": 29000,
+      "amount": 29000
+    },
+    {
+      "description": "BRAKE PAD KIT 2",
+      "quantity": 1,
+      "unit_price": 82000,
+      "amount": 82000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 341000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

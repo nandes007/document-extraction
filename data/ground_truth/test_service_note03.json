@@ -1,0 +1,75 @@
+{
+  "file": "test_service_note03.jpg",
+  "split": "test",
+  "tags": [
+    "printed",
+    "dot_matrix",
+    "rotated",
+    "handwritten_annotation",
+    "subtotal_present",
+    "unreadable_item_names"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "PT. Delta Perdana Mobilindo",
+    "status": "present",
+    "accept": [
+      "Delta Perdana Mobilindo",
+      "PT Delta Perdana Mobilindo"
+    ]
+  },
+  "transaction_date": {
+    "value": "2026-09-28",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "XFP 038/C",
+      "quantity": 1,
+      "unit_price": 1000000,
+      "amount": 1000000
+    },
+    {
+      "description": "Q+ 037/C",
+      "quantity": 1,
+      "unit_price": 5000000,
+      "amount": 5000000
+    },
+    {
+      "description": "SELECTOR DIGITAL",
+      "quantity": 1,
+      "unit_price": 1100000,
+      "amount": 1100000
+    },
+    {
+      "description": "REMAP ECU STD",
+      "quantity": 1,
+      "unit_price": 1500000,
+      "amount": 1500000
+    }
+  ],
+  "subtotal": {
+    "value": 8600000,
+    "status": "present"
+  },
+  "discount": {
+    "value": 0,
+    "status": "present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 8600000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

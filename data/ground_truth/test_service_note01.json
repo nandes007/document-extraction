@@ -1,0 +1,118 @@
+{
+  "file": "test_service_note01.jpg",
+  "split": "test",
+  "tags": [
+    "handwritten",
+    "stamp_overlap",
+    "ambiguous_handwriting",
+    "no_item_quantities",
+    "no_payment"
+  ],
+  "document_type": "vehicle_service",
+  "merchant_name": {
+    "value": "Absolute",
+    "status": "present"
+  },
+  "transaction_date": {
+    "value": "2026-09-22",
+    "status": "present"
+  },
+  "line_items": [
+    {
+      "description": "1 set shock depan tokico",
+      "quantity": 1,
+      "unit_price": null,
+      "amount": 2700000
+    },
+    {
+      "description": "ganti shock, cek kaki-kaki, 2 rem",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 650000
+    },
+    {
+      "description": "perbaikan jok depan",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 500000
+    },
+    {
+      "description": "ganti header + pipa knalpot",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 1350000
+    },
+    {
+      "description": "ODP fast charging",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 320000
+    },
+    {
+      "description": "Packing api manifold",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 175000
+    },
+    {
+      "description": "LED parkir, lampu bumper belakang",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 400000
+    },
+    {
+      "description": "cuci interior, eksterior, 2 ruang mesin",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 100000
+    },
+    {
+      "description": "pertamax",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 320000
+    },
+    {
+      "description": "perbaikan deck, doortrim, 2 kisi AC",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 300000
+    },
+    {
+      "description": "pasang packing",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 200000
+    },
+    {
+      "description": "Jasa pengerjaan",
+      "quantity": null,
+      "unit_price": null,
+      "amount": 750000
+    }
+  ],
+  "subtotal": {
+    "value": null,
+    "status": "not_present"
+  },
+  "discount": {
+    "value": null,
+    "status": "not_present"
+  },
+  "service_charge": {
+    "value": null,
+    "status": "not_present"
+  },
+  "tax": {
+    "value": null,
+    "status": "not_present"
+  },
+  "total": {
+    "value": 7765000,
+    "status": "present"
+  },
+  "payment_method": {
+    "value": null,
+    "status": "not_present"
+  }
+}

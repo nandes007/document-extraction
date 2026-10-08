@@ -1,7 +1,7 @@
 # Task 10: PDF and multi-page input
 
 **Build order item:** brief, "later: multi-page PDF"
-**Status:** todo
+**Status:** done
 **Depends on:** task 5
 
 ## Goal
