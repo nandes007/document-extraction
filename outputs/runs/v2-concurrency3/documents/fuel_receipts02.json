@@ -1,0 +1,102 @@
+{
+  "file": "fuel_receipts02.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 77.69,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "JOGLO RAYA Station",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "JOGLO RAYA Station"
+      },
+      "transaction_date": {
+        "value": "2026-03-06",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Date: 2026-03-06"
+      },
+      "line_items": [
+        {
+          "description": "BPULTIMATE",
+          "quantity": 3.07,
+          "unit_price": 12930,
+          "amount": 39695
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 39695,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total: Rp 39.695"
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "EDC BCA"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 77.68,
+      "usage": {
+        "prompt_tokens": 1858,
+        "completion_tokens": 6587,
+        "total_tokens": 8445
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 39695, total is 39695"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

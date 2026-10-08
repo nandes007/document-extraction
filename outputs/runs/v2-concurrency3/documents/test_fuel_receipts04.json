@@ -1,0 +1,102 @@
+{
+  "file": "test_fuel_receipts04.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 79.47,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "PERTAMINA SPBU S Parman",
+        "status": "present",
+        "confidence": 0.98,
+        "evidence": "PERTAMINA SPBU S Parman Jl. S. Parman Kavling 70"
+      },
+      "transaction_date": {
+        "value": "2025-11-10",
+        "status": "present",
+        "confidence": 0.98,
+        "evidence": "10/11/2025"
+      },
+      "line_items": [
+        {
+          "description": "PERTAMAX_TURBO",
+          "quantity": 4.58,
+          "unit_price": 13100,
+          "amount": 60000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.98,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.98,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.98,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.98,
+        "evidence": null
+      },
+      "total": {
+        "value": 60000,
+        "status": "present",
+        "confidence": 0.98,
+        "evidence": "Total Harga : Rp. 60,000"
+      },
+      "payment_method": {
+        "value": "cash",
+        "status": "present",
+        "confidence": 0.98,
+        "evidence": "CASH"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 79.46,
+      "usage": {
+        "prompt_tokens": 1858,
+        "completion_tokens": 6192,
+        "total_tokens": 8050
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 60000, total is 60000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

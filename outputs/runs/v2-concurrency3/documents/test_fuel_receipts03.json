@@ -1,0 +1,106 @@
+{
+  "file": "test_fuel_receipts03.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 61.91,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "BPAKR MARGONDA RAYA",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "BPAKR MARGONDA RAYA"
+      },
+      "transaction_date": {
+        "value": "2025-11-08",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Date: 08-Nov-2025 11:15 AM"
+      },
+      "line_items": [
+        {
+          "description": "Product: BP 92 L, Qty: 3.432, Price: 12.680, Amount: 43.518",
+          "quantity": 3.432,
+          "unit_price": 12680,
+          "amount": 43518
+        }
+      ],
+      "subtotal": {
+        "value": 43518,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total: 43.518"
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Discount (Fuel): 0\nDiscount (Others): 0"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": "Discount (Fuel): 0\nDiscount (Others): 0"
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 43518,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Net Amount : 43.518"
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Pembayaran: Conventional EDC BCA"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 61.91,
+      "usage": {
+        "prompt_tokens": 1546,
+        "completion_tokens": 4482,
+        "total_tokens": 6028
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 43518, subtotal is 43518"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "discount",
+            "total"
+          ],
+          "detail": "43518 == 43518"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

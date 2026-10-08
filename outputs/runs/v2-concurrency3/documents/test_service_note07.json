@@ -1,0 +1,7 @@
+{
+  "file": "test_service_note07.jpg",
+  "attempts": 3,
+  "http_status": 429,
+  "wall_seconds": 22.35,
+  "error": "{\"detail\":\"provider rate limit: Error code: 429 - {'error': {'message': 'Rate limit exceeded: free-models-per-day. Add 5 credits to unlock 1000 free model requests per day', 'code': 429, 'metadata': {'headers': {'X-RateLimit-Limit': '50', 'X-RateLimit-Remaining': '0', 'X-RateLimit-Reset': '1791504000000'}, 'limit_source': 'openrouter_free_tier_daily', 'remedy_hint': 'Wait for the daily reset (see X-RateLimit-Reset), or purchase credits to raise your free-model daily limit.', 'provider_name': None}}, 'user_id': 'user_2qL7RkY3uPgcHBoPoaoDY4yOxeg'}\"}"
+}

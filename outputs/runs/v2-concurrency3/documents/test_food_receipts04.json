@@ -1,0 +1,182 @@
+{
+  "file": "test_food_receipts04.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 135.07,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "nandes Ayam Penyet Gojek",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "nandes Ayam Penyet Gojek"
+      },
+      "transaction_date": {
+        "value": "2026-10-06",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "06-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "Paket Lengkap Spesial Ayam Goreng ng Mak Dura",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 40900
+        },
+        {
+          "description": "Nasi Ayam Goreng Mak Dura",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Nasi Putih",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Penyet Paha Bawah / Sayap",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Sambal Mataah",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 1
+        },
+        {
+          "description": "Extra Kulit",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Es Teh Manis",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        },
+        {
+          "description": "Perlu Alat Makan",
+          "quantity": 1.0,
+          "unit_price": null,
+          "amount": 0
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 135.06,
+      "usage": {
+        "prompt_tokens": 1958,
+        "completion_tokens": 11474,
+        "total_tokens": 13432
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 40901, subtotal is 40901"
+        },
+        {
+          "name": "totals",
+          "result": "fail",
+          "fields": [
+            "subtotal",
+            "discount",
+            "tax",
+            "total"
+          ],
+          "detail": "63256 (or 61401 without tax) != 20401"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "skipped",
+          "fields": [],
+          "detail": "no row has quantity, unit price and amount"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "subtotal",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 40901,
+          "confidence": 1.0
+        },
+        {
+          "field": "discount",
+          "reason": [
+            "check:totals"
+          ],
+          "value": -20500,
+          "confidence": 1.0
+        },
+        {
+          "field": "tax",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 1855,
+          "confidence": 1.0
+        },
+        {
+          "field": "total",
+          "reason": [
+            "check:totals"
+          ],
+          "value": 20401,
+          "confidence": 1.0
+        }
+      ]
+    }
+  }
+}

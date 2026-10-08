@@ -1,0 +1,134 @@
+{
+  "file": "food_receipts01.jpeg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 61.74,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "Rumah Kecil Talenta M Bloc",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Rumah Kecil Talenta M Bloc"
+      },
+      "transaction_date": {
+        "value": "2026-10-03",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "03-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "MISOA AYAM JAMUR",
+          "quantity": 1.0,
+          "unit_price": 48000,
+          "amount": 48000
+        },
+        {
+          "description": "MISOA GORENG AYAM PEDAS",
+          "quantity": 1.0,
+          "unit_price": 48000,
+          "amount": 48000
+        },
+        {
+          "description": "LEMON MADU DINGIN",
+          "quantity": 1.0,
+          "unit_price": 22000,
+          "amount": 22000
+        },
+        {
+          "description": "LEMON MADU PANAS",
+          "quantity": 1.0,
+          "unit_price": 22000,
+          "amount": 22000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.8,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": 7000,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "Service Charge : 7,000"
+      },
+      "tax": {
+        "value": 14700,
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "PB1 : 14,700"
+      },
+      "total": {
+        "value": 161700,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Grand Total : 161,700"
+      },
+      "payment_method": {
+        "value": "other",
+        "status": "present",
+        "confidence": 0.9,
+        "evidence": "QRIS BNI : 161,700"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 61.62,
+      "usage": {
+        "prompt_tokens": 1933,
+        "completion_tokens": 4497,
+        "total_tokens": 6430
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 140000, subtotal is 140000"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "service_charge",
+            "tax",
+            "total"
+          ],
+          "detail": "161700 == 161700"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "4 row(s) within 1%"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "subtotal",
+          "reason": [
+            "low_confidence"
+          ],
+          "value": 140000,
+          "confidence": 0.8
+        }
+      ]
+    }
+  }
+}

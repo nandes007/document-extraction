@@ -1,0 +1,102 @@
+{
+  "file": "fuel_receipts01.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 75.03,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "VIVO CIPONDOH",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "VIVO\nCIPONDOH"
+      },
+      "transaction_date": {
+        "value": "2025-09-15",
+        "status": "present",
+        "confidence": 0.98,
+        "evidence": "Date: 15-Sep-25/06:40 AM"
+      },
+      "line_items": [
+        {
+          "description": "Revvo 92",
+          "quantity": 3.96,
+          "unit_price": 12610,
+          "amount": 50000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Diskon:                 0\nDiskon kupon:           0\nDiskon BNI:             0"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 50000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "TOTAL: Rp. 50,000"
+      },
+      "payment_method": {
+        "value": "cash",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Mode Pembayaran: Cash"
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 75.02,
+      "usage": {
+        "prompt_tokens": 1933,
+        "completion_tokens": 6195,
+        "total_tokens": 8128
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 50000, total is 50000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

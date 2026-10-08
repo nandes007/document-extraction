@@ -1,0 +1,132 @@
+{
+  "file": "test_service_note05.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 114.17,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "TERUS JAYA MOTOR",
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "TERUS JAYA MOTOR"
+      },
+      "transaction_date": {
+        "value": "2026-10-03",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "03/10/2026"
+      },
+      "line_items": [
+        {
+          "description": "Ganti Air Radiator",
+          "quantity": 1.0,
+          "unit_price": 15000,
+          "amount": 15000
+        },
+        {
+          "description": "Ganti Kampas Rem Belakang",
+          "quantity": 1.0,
+          "unit_price": 20000,
+          "amount": 20000
+        },
+        {
+          "description": "Service Ringan",
+          "quantity": 1.0,
+          "unit_price": 85000,
+          "amount": 85000
+        },
+        {
+          "description": "OLI MESIN (YAMALUBE SUPER SPOR)",
+          "quantity": 1.0,
+          "unit_price": 110000,
+          "amount": 110000
+        },
+        {
+          "description": "OTHERS (YAMALUBE YAMACOOLA)",
+          "quantity": 1.0,
+          "unit_price": 29000,
+          "amount": 29000
+        },
+        {
+          "description": "OTHERS (BRAKE PAD KIT 2 (BLK))",
+          "quantity": 1.0,
+          "unit_price": 82000,
+          "amount": 82000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Discount% column shows 0,00 for the first three items, no discount for others"
+      },
+      "service_charge": {
+        "value": 120000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total Service Rp. 120,000"
+      },
+      "tax": {
+        "value": 11,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Harga sudah termasuk PPN 11%"
+      },
+      "total": {
+        "value": 341000,
+        "status": "present",
+        "confidence": 1.0,
+        "evidence": "Total Bayar Rp. 341,000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 1.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "dots-studio/dots-3-note-preview:free",
+      "prompt_version": "v2",
+      "attempts": 1,
+      "latency_seconds": 114.17,
+      "usage": {
+        "prompt_tokens": 1793,
+        "completion_tokens": 9547,
+        "total_tokens": 11340
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 341000, total is 341000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "6 row(s) within 1%"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}
