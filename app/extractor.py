@@ -41,17 +41,26 @@ Return one JSON object describing the document in the image. Rules:
 - Dates are "YYYY-MM-DD". Day comes before month unless the year is clearly
   first, so "03-10-2026" is 2026-10-03 and "15-Sep-25" is 2025-09-15.
 - A printed zero is a value: "Diskon: 0" is status "present" with value 0.
-- Two total-like lines: the first is subtotal, the last is total. One line
-  only: that is total, and subtotal is "not_present".
+- Subtotal is "present" only when the document has two or more money lines
+  named as a total of the whole bill. The earlier one is subtotal; the amount
+  the customer must pay (Grand Total, Net Amount) is total. One such line
+  only: that is total, and subtotal is "not_present". These are not totals:
+  payment lines (Pembayaran, Tunai, Debit, GoPay, Kembalian), quantity totals
+  (Total Quantity, Total 6 item) and category totals (Total Barang, Total Jasa).
+- payment_method is "debit" or "credit" only when the receipt says so. A card
+  payment that names only an EDC machine or a bank is "card". Food delivery
+  platforms (GoFood, GrabFood, ShopeeFood) are "other".
 - line_items holds the rows as printed. Repeated rows stay separate. Modifiers
   such as "LESS SWEET" are not items. Use null for a quantity, unit price or
   amount the row does not show. For fuel, quantity is litres.
-- document_type is one of: food, fuel, vehicle_service, retail.
+- document_type is one of: food, fuel, vehicle_service, retail. "food" is
+  prepared food and drinks (restaurants, cafes); "retail" is goods bought from
+  a shop, including groceries.
 """
 
 # Bump whenever PROMPT or RESPONSE_FORMAT changes. The cache key also hashes
 # their text, so forgetting is safe for the cache but not for reading scorecards.
-PROMPT_VERSION = "v1"
+PROMPT_VERSION = "v2"
 
 RESPONSE_FORMAT = {
     "type": "json_schema",
