@@ -16,22 +16,24 @@ from app.schema import ExpenseDocument
 LINE_TOLERANCE = 0.01
 
 # Accuracy of `present` fields by stated confidence, dev documents only, run
-# 20261007-083154 (prompt v1, the 6 dev documents labelled at the time):
-# `uv run python evals/calibration.py outputs/runs/20261007-083154`
+# v2-full (prompt v2, 7 dev documents):
+# `uv run python evals/calibration.py outputs/runs/v2-full`
 #
 #   confidence   fields  correct  accuracy
 #   < 0.5             0        0         -
 #   0.5-0.7           0        0         -
 #   0.7-0.8           0        0         -
-#   0.8-0.9           0        0         -
-#   0.9-0.95          4        3     0.750
-#   >= 0.95          26       24     0.923
+#   0.8-0.9           2        1     0.500
+#   0.9-0.95          1        1     1.000
+#   >= 0.95          30       27     0.900
 #
-# The model never went below 0.9, so there is no evidence for anything lower.
-# Raising the cut to 0.95 would drop 3 correct values to catch 1 wrong one, so
-# 0.9: abstain on anything rated below the lowest level seen to be mostly
-# right. The arithmetic checks do most of the work. Recalibrate on the full dev
-# split once the v2 run exists.
+# 0.9 abstains on the 0.8-0.9 bucket: half wrong (service_receipts01
+# service_charge), so it costs one correct value to stop one wrong one. Raising
+# to 0.95 would only drop the one correct 0.9-0.95 value. The three wrong values
+# at >= 0.95 are confident mistakes no threshold can catch; the arithmetic
+# checks are the defence there. Small sample (33 fields): one threshold, no
+# per-field tuning. Earlier table (run 20261007-083154, prompt v1, 6 dev
+# documents): 0.9-0.95 3/4, >= 0.95 24/26, nothing below 0.9.
 ABSTAIN_THRESHOLD = 0.9
 
 AMOUNT_FIELDS = ("subtotal", "discount", "service_charge", "tax", "total")
