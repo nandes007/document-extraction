@@ -11,11 +11,11 @@
   ],
   "document_type": "vehicle_service",
   "merchant_name": {
-    "value": "PT. Delta Perdana Mobilindo",
+    "value": "PT. Delta Performa Mobilindo",
     "status": "present",
     "accept": [
-      "Delta Perdana Mobilindo",
-      "PT Delta Perdana Mobilindo"
+      "Delta Performa Mobilindo",
+      "PT Delta Performa Mobilindo"
     ]
   },
   "transaction_date": {

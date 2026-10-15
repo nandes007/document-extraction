@@ -30,9 +30,9 @@
   },
   "summary": {
     "value_fields": {
-      "correct": 127,
+      "correct": 128,
       "total": 144,
-      "accuracy": 0.882
+      "accuracy": 0.889
     },
     "hallucinated": 4,
     "error_documents": 0,
@@ -84,11 +84,6 @@
       },
       {
         "file": "test_service_note03.jpg",
-        "field": "merchant_name",
-        "class": "wrong_value"
-      },
-      {
-        "file": "test_service_note03.jpg",
         "field": "payment_method",
         "class": "hallucinated"
       },
@@ -125,12 +120,12 @@
     ],
     "fields": {
       "merchant_name": {
-        "correct": 16,
-        "wrong_value": 1,
+        "correct": 17,
+        "wrong_value": 0,
         "missed": 1,
         "hallucinated": 0,
         "error": 0,
-        "accuracy": 0.889
+        "accuracy": 0.944
       },
       "transaction_date": {
         "correct": 17,
@@ -214,9 +209,9 @@
         "accuracy": 1.0
       },
       "vehicle_service": {
-        "correct": 52,
+        "correct": 53,
         "total": 64,
-        "accuracy": 0.812
+        "accuracy": 0.828
       }
     },
     "by_split": {
@@ -226,9 +221,9 @@
         "accuracy": 0.929
       },
       "test": {
-        "correct": 75,
+        "correct": 76,
         "total": 88,
-        "accuracy": 0.852
+        "accuracy": 0.864
       }
     },
     "line_items": {
@@ -1377,11 +1372,11 @@
       "http_attempts": 1,
       "fields": {
         "merchant_name": {
-          "expected": "PT. Delta Perdana Mobilindo",
+          "expected": "PT. Delta Performa Mobilindo",
           "extracted": "PT. DELTA PERFORMA MOBILINDO",
           "status": "present",
           "confidence": 0.95,
-          "class": "wrong_value"
+          "class": "correct"
         },
         "transaction_date": {
           "expected": "2026-09-28",
