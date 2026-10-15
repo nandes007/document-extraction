@@ -34,6 +34,13 @@ LINE_TOLERANCE = 0.01
 # checks are the defence there. Small sample (33 fields): one threshold, no
 # per-field tuning. Earlier table (run 20261007-083154, prompt v1, 6 dev
 # documents): 0.9-0.95 3/4, >= 0.95 24/26, nothing below 0.9.
+#
+# Re-checked on the shipped model, run final-gemini (gemini-2.5-flash):
+#   0.9-0.95  13 fields, 12 correct;  >= 0.95  21 fields, 21 correct.
+# Nothing below 0.9, so on Gemini this threshold never fires. 0.95 would drop
+# 12 correct dev values to stop one wrong one, and all wrong test values were
+# stated at 0.95-0.99. Kept at 0.9 for models that report low confidence;
+# on Gemini the arithmetic checks are the only abstention.
 ABSTAIN_THRESHOLD = 0.9
 
 AMOUNT_FIELDS = ("subtotal", "discount", "service_charge", "tax", "total")

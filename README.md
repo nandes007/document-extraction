@@ -161,8 +161,13 @@ name in `data/ground_truth/`. Counts from the ground truth files:
   `handwritten` (2), `rotated` (2), `multi_page` (1). There are 60 distinct
   tags.
 - **Labels** follow `docs/labeling-guide.md`. Drafts for the newer documents
-  were prepared with an AI assistant; I checked every label against the image.
-  `evals/check_labels.py` checks every file against the schema.
+  were prepared with an AI assistant and checked against the image. One draft
+  error got past that check: `test_service_note03` was labelled "PT. Delta
+  Perdana Mobilindo" where the receipt prints "PT. DELTA PERFORMA MOBILINDO",
+  so the first scorecard counted the model's correct reading as wrong. The
+  label is fixed and `final-gemini` rescored with `--rescore` (no model
+  calls). `evals/check_labels.py` checks every file against the schema, not
+  against the image.
 - **One synthetic PDF:** `test_invoice02.pdf`, 2 pages, made for this dataset
   and marked "SAMPLE DOCUMENT - FOR DATASET / TESTING USE".
 
@@ -232,7 +237,8 @@ flowchart LR
   passing tax-inclusive receipts where the sum without tax matches; and
   `quantity × unit_price = amount` within 1%. A `present` field that is part
   of a failed check, or has confidence below 0.9, is returned as
-  `unreadable`. `meta.checks` and `meta.abstained` say what happened and keep
+  `unreadable`. On Gemini only the checks fire: every `present` field it
+  returns is at 0.9 or above (see "Abstain threshold from data"). `meta.checks` and `meta.abstained` say what happened and keep
   the original value.
 - **Cache** (`app/cache.py`): one JSON file per key, where the key hashes the
   file bytes, the model, the prompt version, a fingerprint of the prompt and
@@ -323,6 +329,24 @@ are confident mistakes that no threshold can catch, which is why the
 arithmetic checks exist. 33 fields is a small sample, so there is one
 threshold for all fields.
 
+That table is from the free dots model. Re-checked on the shipped model,
+`final-gemini` (gemini-2.5-flash, 7 dev documents):
+
+| Confidence | Fields | Correct | Accuracy |
+|---|---|---|---|
+| < 0.9 | 0 | 0 | - |
+| 0.9-0.95 | 13 | 12 | 0.923 |
+| ≥ 0.95 | 21 | 21 | 1.000 |
+
+Gemini never reports below 0.9, so **the 0.9 threshold never fires on the
+shipped model**. Raising it to 0.95 would abstain 12 correct dev values to
+stop one wrong one (`service_receipts01` service charge). On the test split
+(reported here only, not used to choose) it would catch none: all 6 wrong or
+hallucinated test values were stated at 0.95-0.99. Gemini's stated
+confidence does not separate right from wrong, so I keep 0.9 as a guard for
+models that do report low confidence. On Gemini the arithmetic checks are
+the only abstention, and the 6 confident mistakes in the test split went out.
+
 ## Results
 
 ### Final: test split
@@ -332,7 +356,7 @@ reasoning, no cache, all 18 documents. Test split, 11 documents:
 
 | Field | Correct | Wrong value | Missed | Hallucinated |
 |---|---|---|---|---|
-| merchant_name | 9 | 1 | 1 | 0 |
+| merchant_name | 10 | 0 | 1 | 0 |
 | transaction_date | 10 | 1 | 0 | 0 |
 | subtotal | 8 | 0 | 3 | 0 |
 | discount | 8 | 1 | 1 | 1 |
@@ -340,7 +364,7 @@ reasoning, no cache, all 18 documents. Test split, 11 documents:
 | tax | 11 | 0 | 0 | 0 |
 | total | 11 | 0 | 0 | 0 |
 | payment_method | 7 | 0 | 1 | 3 |
-| **value fields** | **75 / 88 (0.852)** | **3** | **6** | **4** |
+| **value fields** | **76 / 88 (0.864)** | **2** | **6** | **4** |
 | document_type | 11 / 11 | | | |
 
 Line items: 49 matched, 4 missing, 11 extra: precision 0.817, recall 0.925.
@@ -364,8 +388,11 @@ From `final-gemini`, test split:
   not written, but the model fills this field.
 - **Wrong year.** `test_service_note06` reads 2025-10-04 for 2026-10-04.
   Nothing checks a date against today, so a year off by one passes.
-- **Merchant name misread.** `test_service_note03`: "PT. DELTA PERFORMA
-  MOBILINDO" for "PT. Delta Perdana Mobilindo", below the fuzzy threshold.
+- **Confident mistakes pass the threshold.** All 6 wrong or hallucinated
+  values above were stated at 0.95-0.99, so the confidence threshold catches
+  none of them. Four are dates or payment methods, which no check covers. The
+  two discounts (`test_service_note05`, `test_service_note07`) are amounts,
+  but the `totals` check was skipped on both, so nothing tested them.
 - **Subtotal missed** on three documents. Two are the model saying
   `not_present`; one (`test_food_receipts04`) is the `line_items_sum` check
   abstaining on a correct 40,901 because the items do not add up to it.
@@ -393,7 +420,7 @@ All from the committed scorecards in `outputs/runs/<run id>/`.
 | `v2-concurrency3` | dots free | v2 | 18 | 109/144 (0.757) | 6 | 1 | concurrency 3, cost and latency |
 | `v2-effort-low` | gemini-2.5-flash | v2 | 7 dev | 53/56 (0.946) | 0 | 0 | reasoning effort `low` |
 | `v2-effort-empty` | gemini-2.5-flash | v2 | 7 dev | 52/56 (0.929) | 0 | 0 | provider default |
-| `final-gemini` | gemini-2.5-flash | v2 | 18 | 127/144 (0.882) | 4 | 0 | final run |
+| `final-gemini` | gemini-2.5-flash | v2 | 18 | 128/144 (0.889) | 4 | 0 | final run (rescored after a label fix) |
 
 "dots free" is `dots-studio/dots-3-note-preview:free`.
 
