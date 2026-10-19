@@ -239,8 +239,8 @@ flowchart LR
   names that method and no other; the date is not after tomorrow. A
   `present` field that is part
   of a failed check, or has confidence below 0.9, is returned as
-  `unreadable`. On Gemini only the checks fire: every `present` field it
-  returns is at 0.9 or above (see "Abstain threshold from data"). `meta.checks` and `meta.abstained` say what happened and keep
+  `unreadable`. Gemini rarely states below 0.9, so on Gemini the checks do
+  most of the abstaining (see "Abstain threshold from data"). `meta.checks` and `meta.abstained` say what happened and keep
   the original value.
 - **Cache** (`app/cache.py`): one JSON file per key, where the key hashes the
   file bytes, the model, the prompt version, a fingerprint of the prompt and
@@ -340,14 +340,16 @@ That table is from the free dots model. Re-checked on the shipped model,
 | 0.9-0.95 | 13 | 12 | 0.923 |
 | ≥ 0.95 | 21 | 21 | 1.000 |
 
-Gemini never reports below 0.9, so **the 0.9 threshold never fires on the
-shipped model**. Raising it to 0.95 would abstain 12 correct dev values to
+In `final-gemini` nothing was stated below 0.9, so **the 0.9 threshold never
+fired on the shipped model** in that run. (It fired twice in the later
+`final-gemini-fresh` run; see Follow-up checks.) Raising it to 0.95 would abstain 12 correct dev values to
 stop one wrong one (`service_receipts01` service charge). On the test split
 (reported here only, not used to choose) it would catch none: all 6 wrong or
 hallucinated test values were stated at 0.95-0.99. Gemini's stated
 confidence does not separate right from wrong, so I keep 0.9 as a guard for
-models that do report low confidence. On Gemini the arithmetic checks are
-the only abstention, and the 6 confident mistakes in the test split went out.
+models that do report low confidence. In `final-gemini` the arithmetic checks
+were the only abstention, and the 6 confident mistakes in the test split
+went out.
 
 ## Results
 
@@ -396,25 +398,56 @@ From `final-gemini`, test split:
   two discounts (`test_service_note05`, `test_service_note07`) are amounts,
   but the `totals` check was skipped on both, so nothing tested them.
 
-**Follow-up checks, after this run.** Two checks were added for these
-failures. Both run after the cache, so these numbers are a replay: the raw
-answers saved from the earlier runs go through the new checks with no model
-calls (not a fresh eval run).
-
-- `payment_evidence`: the evidence must name the chosen method and no other.
-  It catches `test_service_note03` (`transfer` from "BCA") and
-  `test_service_note07` (`card` from the printed "Card/Qris/VA"). It does not
-  catch `test_service_note06`, whose evidence reads "Cash". On `final-gemini`:
-  128 → 130 correct, 4 → 2 hallucinated. Across five saved runs it turned 5
-  hallucinations and 3 wrong payment values into abstentions and abstained no
-  correct value.
-- `date_not_future`: a date after tomorrow is abstained. It never fires on
-  this dataset and would not catch the 2025-for-2026 year, which is in the
-  past. There is no "too old" bound, because correct dates in the dataset go
-  back to 2020.
 - **Subtotal missed** on three documents. Two are the model saying
   `not_present`; one (`test_food_receipts04`) is the `line_items_sum` check
   abstaining on a correct 40,901 because the items do not add up to it.
+
+### Follow-up checks
+
+Two checks were added after `final-gemini` for the failures above:
+
+- `payment_evidence`: the evidence must name the chosen method and no other.
+  It catches `transfer` read from a bank name ("BCA", `test_service_note03`)
+  and `card` read from a printed list of accepted methods ("Card/Qris/VA",
+  `test_service_note07`).
+- `date_not_future`: a date after tomorrow is abstained. It never fired on
+  this dataset and cannot catch the 2025-for-2026 year, which is in the
+  past. There is no "too old" bound, because correct dates in the dataset go
+  back to 2020.
+
+Two runs measure them:
+
+| Run | Answers | Value fields | Test split | Halluc. | vs `final-gemini` |
+|---|---|---|---|---|---|
+| `final-gemini` | new calls | 128/144 (0.889) | 76/88 | 4 | - |
+| `final-gemini-checks` | `final-gemini`'s, from the cache | 130/144 (0.903) | 78/88 | 2 | 0 regressions, 2 fixes |
+| `final-gemini-fresh` | new calls, $0.042 | 132/144 (0.917) | 80/88 | 1 | 2 regressions, 5 fixes |
+
+`final-gemini-checks` isolates the checks: same answers, so both fixes are
+theirs (payment method on note03 and note07, hallucinated → abstained).
+Before that run, I replayed the saved answers from five earlier runs through
+the new checks. It turned 5 hallucinations and 3 wrong payment values into
+abstentions and abstained no correct value.
+
+`final-gemini-fresh` adds run-to-run noise. Its two regressions do not come
+from the new checks:
+
+- `test_fuel_receipts03` payment method: the model stated 0.8 for a correct
+  `card`, and the 0.9 threshold abstained it.
+- `test_service_note03` document type read as `retail`. No check touches
+  document type.
+
+This is the first run where the 0.9 threshold fired on Gemini, twice: once
+on the correct `card` above, and once on `test_service_note06`'s wrong year
+(2025-10-04, stated 0.8), which went from wrong value to missed. One right
+value lost and one wrong one stopped is the same trade the threshold made on
+the dots model.
+
+The other changes are model variance. `test_service_note06` payment method
+became `not_present` (the model's own answer, not the check), and
+`test_food_receipts04` subtotal and `test_service_note02` discount went from
+missed to correct. One hallucination remains: the `test_service_note05`
+discount of 0.
 
 From the free-model runs (`v1-checks`, `v2-full`):
 
@@ -440,6 +473,8 @@ All from the committed scorecards in `outputs/runs/<run id>/`.
 | `v2-effort-low` | gemini-2.5-flash | v2 | 7 dev | 53/56 (0.946) | 0 | 0 | reasoning effort `low` |
 | `v2-effort-empty` | gemini-2.5-flash | v2 | 7 dev | 52/56 (0.929) | 0 | 0 | provider default |
 | `final-gemini` | gemini-2.5-flash | v2 | 18 | 128/144 (0.889) | 4 | 0 | final run (rescored after a label fix) |
+| `final-gemini-checks` | gemini-2.5-flash | v2 | 18 | 130/144 (0.903) | 2 | 0 | same answers (cache), payment and date checks on |
+| `final-gemini-fresh` | gemini-2.5-flash | v2 | 18 | 132/144 (0.917) | 1 | 0 | new calls with the new checks |
 
 "dots free" is `dots-studio/dots-3-note-preview:free`.
 
