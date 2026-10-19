@@ -1,4 +1,5 @@
-"""Arithmetic checks and the abstention rule. Pure functions: no I/O.
+"""Arithmetic and consistency checks, and the abstention rule. Pure functions:
+no I/O (`date_not_future` reads today's date unless given one).
 
 Runs after the cache, on the model's raw document, so changing a check or the
 threshold needs no model calls: rerun with the cache on.
@@ -8,6 +9,9 @@ Each check gives `pass`, `fail` or `skipped` and names the fields it covers. A
 ABSTAIN_THRESHOLD, is returned as `unreadable`: a wrong amount in an expense
 claim pays out money, an abstention only costs a person a look.
 """
+
+import re
+from datetime import date, timedelta
 
 from app.schema import ExpenseDocument
 
@@ -103,7 +107,57 @@ def line_arithmetic(document: ExpenseDocument) -> dict:
     return _check("line_arithmetic", "pass", [], f"{len(rows)} row(s) within {LINE_TOLERANCE:.0%}")
 
 
-CHECKS = (line_items_sum, totals, line_arithmetic)
+# Words on a receipt that name each payment method, matched as whole words,
+# case-insensitive. "other" has none: it is whatever is not in this list.
+PAYMENT_WORDS = {
+    "cash": ["cash", "tunai"],
+    "debit": ["debit"],
+    "credit": ["credit", "kredit"],
+    "card": ["card", "kartu", "edc", "visa", "mastercard"],
+    "qris": ["qris"],
+    "ewallet": ["gopay", "ovo", "dana", "shopeepay", "linkaja"],
+    "transfer": ["transfer", "trf", "va", "virtual account"],
+}
+
+
+def _payment_methods_named(text: str) -> set[str]:
+    return {method for method, words in PAYMENT_WORDS.items()
+            if any(re.search(rf"\b{re.escape(w)}\b", text, re.IGNORECASE) for w in words)}
+
+
+def payment_evidence(document: ExpenseDocument) -> dict:
+    """The evidence names the chosen payment method and no other.
+
+    Models fill this field from hints such as a bank name ("BCA" read as
+    `transfer`) or a printed list of accepted methods ("Card/Qris/VA").
+    """
+    payment = document.payment_method
+    if payment.status != "present" or payment.value == "other":
+        return _check("payment_evidence", "skipped", [], "not present, or `other`")
+    named = _payment_methods_named(payment.evidence or "")
+    if named == {payment.value}:
+        return _check("payment_evidence", "pass", ["payment_method"], f"evidence names {payment.value}")
+    return _check("payment_evidence", "fail", ["payment_method"],
+                  f"evidence {payment.evidence!r} names {sorted(named) or 'no method'}, value is {payment.value}")
+
+
+def date_not_future(document: ExpenseDocument, today: date | None = None) -> dict:
+    """A receipt cannot be dated after the day it is claimed. One day of slack
+    for time zones (Indonesia is UTC+7; the server may run on UTC).
+
+    ponytail: no lower bound. The dataset has correct dates back to 2020, so a
+    "too old" rule would abstain right values; an expense policy's claim window
+    is the place for one.
+    """
+    extracted = document.transaction_date
+    if extracted.status != "present" or extracted.value is None:
+        return _check("date_not_future", "skipped", [], "no date")
+    latest = (today or date.today()) + timedelta(days=1)
+    result = "pass" if extracted.value <= latest else "fail"
+    return _check("date_not_future", result, ["transaction_date"], f"{extracted.value} vs latest {latest}")
+
+
+CHECKS = (line_items_sum, totals, line_arithmetic, payment_evidence, date_not_future)
 
 
 def run_checks(document: ExpenseDocument) -> list[dict]:

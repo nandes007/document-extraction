@@ -1,8 +1,10 @@
 import json
+from datetime import date
 
 from app.extractor import extract
 from app.schema import ExpenseDocument
-from app.validation import abstain, line_arithmetic, line_items_sum, run_checks, totals
+from app.validation import (abstain, date_not_future, line_arithmetic, line_items_sum,
+                            payment_evidence, run_checks, totals)
 from tests.test_extractor import FakeClient, temp_cache  # noqa: F401
 from tests.test_schema import VALID_DOCUMENT
 
@@ -128,6 +130,67 @@ def test_absent_fields_are_never_touched():
     assert result.discount.status == "not_present"
 
 
+# --- payment_evidence -------------------------------------------------------
+
+
+def pay(value, evidence):
+    return doc(payment_method=field(value) | {"evidence": evidence})
+
+
+def test_payment_named_in_evidence_passes():
+    for value, evidence in [("cash", "Mode Pembayaran: Cash"), ("card", "Conventional EDC BCA"),
+                            ("qris", "QRIS BN1"), ("debit", "DEBIT")]:
+        assert payment_evidence(pay(value, evidence))["result"] == "pass", evidence
+
+
+def test_bank_name_alone_is_not_a_transfer():
+    # test_service_note03: a handwritten account number read as `transfer`.
+    check = payment_evidence(pay("transfer", "BCA"))
+    assert check["result"] == "fail" and check["fields"] == ["payment_method"]
+
+
+def test_list_of_accepted_methods_fails():
+    # test_service_note07: a printed "Card/Qris/VA" label is not a payment.
+    assert payment_evidence(pay("card", "Card/Qris/VA"))["result"] == "fail"
+
+
+def test_payment_without_evidence_fails():
+    assert payment_evidence(pay("cash", None))["result"] == "fail"
+
+
+def test_words_match_whole_words_only():
+    assert payment_evidence(pay("transfer", "VALUE MEAL"))["result"] == "fail"
+
+
+def test_other_and_absent_payment_skip():
+    assert payment_evidence(pay("other", "GOFOOD"))["result"] == "skipped"
+    assert payment_evidence(doc(payment_method=ABSENT))["result"] == "skipped"
+
+
+def test_failed_payment_evidence_abstains():
+    document = pay("transfer", "BCA")
+    out, abstained = abstain(document, run_checks(document))
+    assert out.payment_method.status == "unreadable"
+    assert abstained[0]["reason"] == ["check:payment_evidence"]
+
+
+# --- date_not_future --------------------------------------------------------
+
+
+def test_date_up_to_tomorrow_passes():
+    for d in ["2020-11-29", "2026-10-19", "2026-10-20"]:
+        assert date_not_future(doc(transaction_date=field(d)), today=date(2026, 10, 19))["result"] == "pass"
+
+
+def test_future_date_fails():
+    check = date_not_future(doc(transaction_date=field("2026-10-21")), today=date(2026, 10, 19))
+    assert check["result"] == "fail" and check["fields"] == ["transaction_date"]
+
+
+def test_absent_date_skips():
+    assert date_not_future(doc(transaction_date=ABSENT))["result"] == "skipped"
+
+
 # --- through extract() ------------------------------------------------------
 
 
@@ -137,7 +200,7 @@ def test_cache_hit_reapplies_the_current_rules(monkeypatch):
     client = FakeClient(json.dumps(raw))
     first, first_meta = extract(b"img", client=client, model="m")
     assert first.subtotal.status == "unreadable"
-    assert [c["result"] for c in first_meta["checks"]] == ["fail", "pass", "pass"]
+    assert [c["result"] for c in first_meta["checks"]] == ["fail", "pass", "pass", "pass", "pass"]
 
     # A stricter threshold on the next call, served from the cache.
     monkeypatch.setattr("app.validation.ABSTAIN_THRESHOLD", 1.0)

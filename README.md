@@ -235,7 +235,9 @@ flowchart LR
 - **Validation in code** (`app/validation.py`): item amounts sum to the
   subtotal (or total); `subtotal - discount + service_charge + tax = total`,
   passing tax-inclusive receipts where the sum without tax matches; and
-  `quantity × unit_price = amount` within 1%. A `present` field that is part
+  `quantity × unit_price = amount` within 1%; the payment method's evidence
+  names that method and no other; the date is not after tomorrow. A
+  `present` field that is part
   of a failed check, or has confidence below 0.9, is returned as
   `unreadable`. On Gemini only the checks fire: every `present` field it
   returns is at 0.9 or above (see "Abstain threshold from data"). `meta.checks` and `meta.abstained` say what happened and keep
@@ -393,6 +395,23 @@ From `final-gemini`, test split:
   none of them. Four are dates or payment methods, which no check covers. The
   two discounts (`test_service_note05`, `test_service_note07`) are amounts,
   but the `totals` check was skipped on both, so nothing tested them.
+
+**Follow-up checks, after this run.** Two checks were added for these
+failures. Both run after the cache, so these numbers are a replay: the raw
+answers saved from the earlier runs go through the new checks with no model
+calls (not a fresh eval run).
+
+- `payment_evidence`: the evidence must name the chosen method and no other.
+  It catches `test_service_note03` (`transfer` from "BCA") and
+  `test_service_note07` (`card` from the printed "Card/Qris/VA"). It does not
+  catch `test_service_note06`, whose evidence reads "Cash". On `final-gemini`:
+  128 → 130 correct, 4 → 2 hallucinated. Across five saved runs it turned 5
+  hallucinations and 3 wrong payment values into abstentions and abstained no
+  correct value.
+- `date_not_future`: a date after tomorrow is abstained. It never fires on
+  this dataset and would not catch the 2025-for-2026 year, which is in the
+  past. There is no "too old" bound, because correct dates in the dataset go
+  back to 2020.
 - **Subtotal missed** on three documents. Two are the model saying
   `not_present`; one (`test_food_receipts04`) is the `line_items_sum` check
   abstaining on a correct 40,901 because the items do not add up to it.
@@ -613,7 +632,8 @@ The project was built with Claude Code.
   Per-field thresholds once there is enough data per field.
 - **Smarter abstention.** A failed `totals` check abstains every amount in it;
   narrowing it to the field most likely wrong would keep correct values.
-- **Date sanity.** Reject dates in the future or far in the past.
+- **Date sanity.** Future dates are abstained; a lower bound belongs to the
+  client's claim window, which this dataset does not have.
 - **Compare should check settings, not only model and prompt.** It reported
   `same_version` for the reasoning-effort pair because it ignores
   `reasoning_effort`.
