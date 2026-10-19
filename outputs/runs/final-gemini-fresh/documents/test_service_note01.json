@@ -1,0 +1,193 @@
+{
+  "file": "test_service_note01.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 3.87,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.8999999761581421,
+        "evidence": null
+      },
+      "transaction_date": {
+        "value": "2026-09-22",
+        "status": "present",
+        "confidence": 0.9999998807907104,
+        "evidence": "22 September 2026"
+      },
+      "line_items": [
+        {
+          "description": "1 set shock depan tokico",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 2700000
+        },
+        {
+          "description": "ganti shock , cek kaki-kaki, a rem",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 650000
+        },
+        {
+          "description": "Perbaikan Jok depan",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 500000
+        },
+        {
+          "description": "ganti header o pipa knalpot",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 1350000
+        },
+        {
+          "description": "ODP fast charging",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 320000
+        },
+        {
+          "description": "Packing api manifold",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 175000
+        },
+        {
+          "description": "LED parkir, lampu bumper belakang",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 400000
+        },
+        {
+          "description": "cuci interior, eksterior, & ruang mesin",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 100000
+        },
+        {
+          "description": "pertamax",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 320000
+        },
+        {
+          "description": "Perbaikan deck, doortrim, a kisi AC",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 300000
+        },
+        {
+          "description": "pasang packing",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 200000
+        },
+        {
+          "description": "Jasa pengerjaan",
+          "quantity": null,
+          "unit_price": null,
+          "amount": 750000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 7765000,
+        "status": "present",
+        "confidence": 0.9999998807907104,
+        "evidence": "7.765.000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 3.87,
+      "usage": {
+        "prompt_tokens": 2479,
+        "completion_tokens": 745,
+        "total_tokens": 3224,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 7765000, total is 7765000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "skipped",
+          "fields": [],
+          "detail": "no row has quantity, unit price and amount"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "skipped",
+          "fields": [],
+          "detail": "not present, or `other`"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2026-09-22 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "merchant_name",
+          "reason": [
+            "low_confidence"
+          ],
+          "value": "Absolute",
+          "confidence": 0.8999999761581421
+        }
+      ]
+    }
+  }
+}

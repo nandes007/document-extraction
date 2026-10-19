@@ -1,0 +1,144 @@
+{
+  "file": "test_service_note06.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 0.03,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "CV INTAN MULIA 10136",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "CV INTAN MULIA 10136"
+      },
+      "transaction_date": {
+        "value": "2025-10-04",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "2025-10-04"
+      },
+      "line_items": [
+        {
+          "description": "OLI MPX2 10W30 SL 0,8L IDE",
+          "quantity": 1.0,
+          "unit_price": 79000,
+          "amount": 79000
+        },
+        {
+          "description": "SCOOTER GEAR OIL-SYN120MLREP",
+          "quantity": 1.0,
+          "unit_price": 23000,
+          "amount": 23000
+        },
+        {
+          "description": "WEIGHT SET CLUCTH",
+          "quantity": 1.0,
+          "unit_price": 149000,
+          "amount": 149000
+        },
+        {
+          "description": "QS SERVICE",
+          "quantity": 1.0,
+          "unit_price": 95000,
+          "amount": 95000
+        },
+        {
+          "description": "LR CVT & PASANG KAMPAS GANDA",
+          "quantity": 1.0,
+          "unit_price": 89000,
+          "amount": 89000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "0"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "0"
+      },
+      "total": {
+        "value": 435000,
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "435.000"
+      },
+      "payment_method": {
+        "value": "cash",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "Cash"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 5.75,
+      "usage": {
+        "prompt_tokens": 3040,
+        "completion_tokens": 711,
+        "total_tokens": 3751,
+        "reasoning_tokens": 0
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 435000, total is 435000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "5 row(s) within 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "pass",
+          "fields": [
+            "payment_method"
+          ],
+          "detail": "evidence names cash"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2025-10-04 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

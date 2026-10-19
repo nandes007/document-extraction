@@ -1,0 +1,120 @@
+{
+  "file": "fuel_receipts02.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 3.86,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "JOGLO RAYA Station",
+        "status": "present",
+        "confidence": 0.95,
+        "evidence": "JOGLO RAYA Station"
+      },
+      "transaction_date": {
+        "value": "2026-03-06",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "2026-03-06"
+      },
+      "line_items": [
+        {
+          "description": "BPULTIMATE",
+          "quantity": 3.07,
+          "unit_price": 12930,
+          "amount": 39695
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 39695,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "39.695"
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "EDC BCA"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 3.86,
+      "usage": {
+        "prompt_tokens": 2995,
+        "completion_tokens": 336,
+        "total_tokens": 3331,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 39695, total is 39695"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "pass",
+          "fields": [
+            "payment_method"
+          ],
+          "detail": "evidence names card"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2026-03-06 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

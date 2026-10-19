@@ -1,0 +1,120 @@
+{
+  "file": "test_fuel_receipts03.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 0.01,
+  "response": {
+    "document": {
+      "document_type": "fuel",
+      "merchant_name": {
+        "value": "BPAKR MARGONDA RAYA",
+        "status": "present",
+        "confidence": 0.9000000000000001,
+        "evidence": "BPAKR MARGONDA RAYA"
+      },
+      "transaction_date": {
+        "value": "2025-11-08",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "08-Nov-2025"
+      },
+      "line_items": [
+        {
+          "description": "BP 92",
+          "quantity": 3.432,
+          "unit_price": 12680,
+          "amount": 43518
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "0"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 43518,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "43.518"
+      },
+      "payment_method": {
+        "value": "card",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "Conventional EDC BCA"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 3.68,
+      "usage": {
+        "prompt_tokens": 2524,
+        "completion_tokens": 356,
+        "total_tokens": 2880,
+        "reasoning_tokens": 0
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 43518, total is 43518"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "1 row(s) within 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "pass",
+          "fields": [
+            "payment_method"
+          ],
+          "detail": "evidence names card"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2025-11-08 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

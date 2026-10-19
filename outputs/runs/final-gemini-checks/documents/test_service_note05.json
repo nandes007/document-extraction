@@ -1,0 +1,148 @@
+{
+  "file": "test_service_note05.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 0.04,
+  "response": {
+    "document": {
+      "document_type": "vehicle_service",
+      "merchant_name": {
+        "value": "TERUS JAYA MOTOR",
+        "status": "present",
+        "confidence": 0.9899999999999999,
+        "evidence": "TERUS JAYA MOTOR"
+      },
+      "transaction_date": {
+        "value": "2026-10-03",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "03/10/2026"
+      },
+      "line_items": [
+        {
+          "description": "Ganti Air Radiator",
+          "quantity": 1.0,
+          "unit_price": 15000,
+          "amount": 15000
+        },
+        {
+          "description": "Ganti Kampas Rem Belak",
+          "quantity": 1.0,
+          "unit_price": 20000,
+          "amount": 20000
+        },
+        {
+          "description": "Service Ringan",
+          "quantity": 1.0,
+          "unit_price": 85000,
+          "amount": 85000
+        },
+        {
+          "description": "OLI MESIN",
+          "quantity": 1.0,
+          "unit_price": 110000,
+          "amount": 110000
+        },
+        {
+          "description": "OTHERS",
+          "quantity": 1.0,
+          "unit_price": 29000,
+          "amount": 29000
+        },
+        {
+          "description": "OTHERS",
+          "quantity": 1.0,
+          "unit_price": 82000,
+          "amount": 82000
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "0"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 341000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "341,000"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 4.36,
+      "usage": {
+        "prompt_tokens": 2524,
+        "completion_tokens": 722,
+        "total_tokens": 3246,
+        "reasoning_tokens": 0
+      },
+      "cached": true,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 341000, total is 341000"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "6 row(s) within 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "skipped",
+          "fields": [],
+          "detail": "not present, or `other`"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2026-10-03 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

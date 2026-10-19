@@ -1,0 +1,143 @@
+{
+  "file": "food_receipts01.jpeg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 6.42,
+  "response": {
+    "document": {
+      "document_type": "food",
+      "merchant_name": {
+        "value": "Rumah Kecil Talenta M Bloc",
+        "status": "present",
+        "confidence": 0.94,
+        "evidence": "Rumah Kecil Talenta M Bloc"
+      },
+      "transaction_date": {
+        "value": "2026-10-03",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "03-10-2026"
+      },
+      "line_items": [
+        {
+          "description": "MISOA AYAM JAMUR",
+          "quantity": 1.0,
+          "unit_price": 48000,
+          "amount": 48000
+        },
+        {
+          "description": "MISOA GORENG AYAM PEDAS",
+          "quantity": 1.0,
+          "unit_price": 48000,
+          "amount": 48000
+        },
+        {
+          "description": "LEMON MADU DINGIN",
+          "quantity": 1.0,
+          "unit_price": 22000,
+          "amount": 22000
+        },
+        {
+          "description": "LEMON MADU PANAS",
+          "quantity": 1.0,
+          "unit_price": 22000,
+          "amount": 22000
+        }
+      ],
+      "subtotal": {
+        "value": 140000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "140,000"
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": 7000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "7,000"
+      },
+      "tax": {
+        "value": 14700,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "14,700"
+      },
+      "total": {
+        "value": 161700,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "161,700"
+      },
+      "payment_method": {
+        "value": "qris",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "QRIS BN1"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 6.32,
+      "usage": {
+        "prompt_tokens": 4543,
+        "completion_tokens": 679,
+        "total_tokens": 5222,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 140000, subtotal is 140000"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "service_charge",
+            "tax",
+            "total"
+          ],
+          "detail": "161700 == 161700"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "4 row(s) within 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "pass",
+          "fields": [
+            "payment_method"
+          ],
+          "detail": "evidence names qris"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2026-10-03 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

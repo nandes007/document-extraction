@@ -1,0 +1,150 @@
+{
+  "file": "food_receipts02.jpeg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 5.71,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "TOTAL BUAH SEGAR",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "TOTAL BUAH SEGAR"
+      },
+      "transaction_date": {
+        "value": "2026-09-30",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "30/09/2026"
+      },
+      "line_items": [
+        {
+          "description": "DRAGON FRUIT MERAH KUPAS LOKAL",
+          "quantity": 0.0006,
+          "unit_price": 50500,
+          "amount": 15150
+        },
+        {
+          "description": "ANGGUR SHINE MUSCAT RRC 500g",
+          "quantity": 1.0,
+          "unit_price": 33500,
+          "amount": 33500
+        },
+        {
+          "description": "ANGGUR SHINE MUSCAT RRC 500g",
+          "quantity": 1.0,
+          "unit_price": 33500,
+          "amount": 33500
+        },
+        {
+          "description": "KELA MUDA THUMB/BIJI ISI 12",
+          "quantity": 1.0,
+          "unit_price": 38500,
+          "amount": 38500
+        },
+        {
+          "description": "JERUNAFOURER AUSTRALIA KECIL",
+          "quantity": 0.46,
+          "unit_price": 67500,
+          "amount": 31050
+        },
+        {
+          "description": "NESTLE MILO NUGGETS 25g",
+          "quantity": 1.0,
+          "unit_price": 12500,
+          "amount": 12500
+        }
+      ],
+      "subtotal": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "discount": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 164200,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "164,200"
+      },
+      "payment_method": {
+        "value": "debit",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "DEBIT"
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 5.6,
+      "usage": {
+        "prompt_tokens": 2995,
+        "completion_tokens": 767,
+        "total_tokens": 3762,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "total"
+          ],
+          "detail": "items sum to 164200, total is 164200"
+        },
+        {
+          "name": "totals",
+          "result": "skipped",
+          "fields": [],
+          "detail": "needs both subtotal and total"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "fail",
+          "fields": [],
+          "detail": "rows [0] off by more than 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "pass",
+          "fields": [
+            "payment_method"
+          ],
+          "detail": "evidence names debit"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2026-09-30 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": []
+    }
+  }
+}

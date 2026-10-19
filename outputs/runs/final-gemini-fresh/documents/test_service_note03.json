@@ -1,0 +1,151 @@
+{
+  "file": "test_service_note03.jpg",
+  "attempts": 1,
+  "http_status": 200,
+  "wall_seconds": 3.22,
+  "response": {
+    "document": {
+      "document_type": "retail",
+      "merchant_name": {
+        "value": "PT. DELTA PERFORMA MOBILINDO",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "PT. DELTA PERFORMA MOBILINDO"
+      },
+      "transaction_date": {
+        "value": "2026-09-28",
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "28 September 2026"
+      },
+      "line_items": [
+        {
+          "description": "XFP 03870",
+          "quantity": 1.0,
+          "unit_price": 1000000,
+          "amount": 1000000
+        },
+        {
+          "description": "Q+ 0377C",
+          "quantity": 1.0,
+          "unit_price": 5000000,
+          "amount": 5000000
+        },
+        {
+          "description": "SELECTOR DIGITAL",
+          "quantity": 1.0,
+          "unit_price": 1100000,
+          "amount": 1100000
+        },
+        {
+          "description": "REMAP EDU STD",
+          "quantity": 1.0,
+          "unit_price": 1500000,
+          "amount": 1500000
+        }
+      ],
+      "subtotal": {
+        "value": 8600000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "8,600,000.00"
+      },
+      "discount": {
+        "value": 0,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "0.00"
+      },
+      "service_charge": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "tax": {
+        "value": null,
+        "status": "not_present",
+        "confidence": 0.0,
+        "evidence": null
+      },
+      "total": {
+        "value": 8600000,
+        "status": "present",
+        "confidence": 0.99,
+        "evidence": "8,600,000.00"
+      },
+      "payment_method": {
+        "value": null,
+        "status": "unreadable",
+        "confidence": 0.99,
+        "evidence": null
+      }
+    },
+    "meta": {
+      "model": "google/gemini-2.5-flash",
+      "prompt_version": "v2",
+      "reasoning_effort": null,
+      "attempts": 1,
+      "latency_seconds": 3.22,
+      "usage": {
+        "prompt_tokens": 2995,
+        "completion_tokens": 525,
+        "total_tokens": 3520,
+        "reasoning_tokens": 0
+      },
+      "cached": false,
+      "checks": [
+        {
+          "name": "line_items_sum",
+          "result": "pass",
+          "fields": [
+            "subtotal"
+          ],
+          "detail": "items sum to 8600000, subtotal is 8600000"
+        },
+        {
+          "name": "totals",
+          "result": "pass",
+          "fields": [
+            "subtotal",
+            "discount",
+            "total"
+          ],
+          "detail": "8600000 == 8600000"
+        },
+        {
+          "name": "line_arithmetic",
+          "result": "pass",
+          "fields": [],
+          "detail": "4 row(s) within 1%"
+        },
+        {
+          "name": "payment_evidence",
+          "result": "fail",
+          "fields": [
+            "payment_method"
+          ],
+          "detail": "evidence 'BCA 8035 677 611' names no method, value is transfer"
+        },
+        {
+          "name": "date_not_future",
+          "result": "pass",
+          "fields": [
+            "transaction_date"
+          ],
+          "detail": "2026-09-28 vs latest 2026-10-20"
+        }
+      ],
+      "abstained": [
+        {
+          "field": "payment_method",
+          "reason": [
+            "check:payment_evidence"
+          ],
+          "value": "transfer",
+          "confidence": 0.99
+        }
+      ]
+    }
+  }
+}
